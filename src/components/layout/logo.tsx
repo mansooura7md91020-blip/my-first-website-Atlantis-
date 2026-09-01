@@ -1,26 +1,45 @@
 import { cn } from "@/lib/utils/cn";
 
 /**
- * Logo concept: an "A" formed by two converging wave crests (Atlantis / depth),
- * with a single sand-gold droplet marking the peak — the one accent color in
- * the whole identity. Works as a standalone mark (favicon, admin) or full
- * lockup with the bilingual wordmark (header).
+ * ATLANTIS mark — "The Twin Pillars"
+ *
+ * Two columns joined by a lintel, doubling as an abstract "A" and a
+ * nod to Atlantis's mythic gateway pillars — reads as stability and
+ * structure (fitting a B2B supply business), not a generic wave.
+ * A single bronze accent line marks the "waterline" beneath the lintel.
+ *
+ * Colors are drawn from CSS variables so the mark auto-adapts between
+ * light and dark themes without a separate asset. `tone="on-brand"`
+ * renders a flat white/bronze version for placement on a solid
+ * brand-colored surface (e.g. the hero), where the badge background
+ * itself would disappear.
  */
-export function LogoMark({ className }: { className?: string }) {
+export function LogoMark({
+  className,
+  tone = "badge",
+}: {
+  className?: string;
+  tone?: "badge" | "on-brand";
+}) {
+  if (tone === "on-brand") {
+    return (
+      <svg viewBox="0 0 48 48" fill="none" className={cn("h-8 w-8", className)} aria-hidden="true">
+        <path d="M10 14h28M13 14v22M35 14v22" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" />
+        <path d="M9 41h30" stroke="#D9A047" strokeWidth="3" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
   return (
     <svg viewBox="0 0 48 48" fill="none" className={cn("h-8 w-8", className)} aria-hidden="true">
-      <rect width="48" height="48" rx="12" fill="var(--brand-strong, #0B3D42)" />
+      <rect width="48" height="48" rx="11" fill="var(--brand-strong)" />
       <path
-        d="M24 10 L34 34 H29.5 L27.3 28.5 H20.7 L18.5 34 H14 L24 10 Z M24 18.5 L21.6 24.5 H26.4 L24 18.5 Z"
-        fill="#F7FAF9"
-      />
-      <path
-        d="M9 38c3-2.4 6-2.4 9 0s6 2.4 9 0 6-2.4 9 0 6 2.4 9 0"
-        stroke="#D9A441"
-        strokeWidth="2.2"
+        d="M13 15h22M16 15v18M32 15v18"
+        stroke="var(--surface)"
+        strokeWidth="3.2"
         strokeLinecap="round"
-        fill="none"
       />
+      <path d="M12 35h24" stroke="var(--accent)" strokeWidth="2.6" strokeLinecap="round" />
     </svg>
   );
 }
@@ -30,25 +49,36 @@ export function Logo({
   wordmarkClassName,
   companyNameAr,
   brandName,
-  variant = "auto",
+  tone = "badge",
+  variant = "full",
 }: {
   className?: string;
   wordmarkClassName?: string;
   companyNameAr: string;
   brandName: string;
-  /** "auto" shows the localized subtitle beneath the ATLANTIS wordmark. */
-  variant?: "auto" | "mark-only";
+  tone?: "badge" | "on-brand";
+  /** "full" shows the wordmark + Arabic subtitle; "mark-only" shows just the icon. */
+  variant?: "full" | "mark-only";
 }) {
-  if (variant === "mark-only") return <LogoMark className={className} />;
+  if (variant === "mark-only") return <LogoMark className={className} tone={tone} />;
+
+  const textColor = tone === "on-brand" ? "text-white" : "text-text";
+  const subColor = tone === "on-brand" ? "text-white/65" : "text-text-muted";
 
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark />
+      <LogoMark tone={tone} />
       <span className="flex flex-col leading-none">
-        <span className={cn("font-display text-lg font-bold tracking-wide text-text", wordmarkClassName)}>
+        <span
+          className={cn(
+            "font-display text-lg font-bold tracking-[0.04em]",
+            textColor,
+            wordmarkClassName
+          )}
+        >
           {brandName}
         </span>
-        <span className="text-[11px] text-text-muted">{companyNameAr}</span>
+        <span className={cn("mt-0.5 text-[11px]", subColor)}>{companyNameAr}</span>
       </span>
     </span>
   );

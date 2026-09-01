@@ -15,9 +15,7 @@ function getPreferredLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Admin routes are not localized in v1.
-  if (pathname.startsWith("/admin")) return NextResponse.next();
-
+  // Admin is now localized too (/ar/admin, /en/admin) — same redirect rules apply.
   const pathnameHasLocale = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );

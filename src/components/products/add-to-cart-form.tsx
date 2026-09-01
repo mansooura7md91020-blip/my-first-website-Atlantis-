@@ -69,16 +69,21 @@ export function AddToCartForm({ product }: { product: Product }) {
         </p>
       </div>
 
-      <div className="rounded-lg bg-surface-muted p-4">
+      <div className="rounded-xl border border-border bg-surface-muted p-4">
         {price.requiresQuote ? (
           <p className="text-sm font-medium text-accent-strong">{t("common.requiresQuote")}</p>
         ) : (
           <div className="flex items-baseline justify-between">
             <span className="text-sm text-text-muted">{t("common.total")}</span>
-            <span className="tabular text-lg font-bold text-brand-strong">
+            <span className="tabular font-display text-xl font-bold text-brand-strong">
               {t("common.egp")} {formatEGP(price.lineTotal!, locale)}
             </span>
           </div>
+        )}
+        {!price.requiresQuote && price.tier && (
+          <p className="mt-1 text-xs text-text-muted">
+            {t("common.egp")} {formatEGP(price.unitPrice!, locale)} × {quantity} {t(`units.${product.unit}`)}
+          </p>
         )}
       </div>
 

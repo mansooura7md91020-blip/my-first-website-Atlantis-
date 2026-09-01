@@ -6,10 +6,6 @@ import { getDictionary } from "@/lib/i18n/config";
 import { I18nProvider } from "@/lib/i18n/i18n-provider";
 import { ThemeProvider } from "@/lib/context/theme-context";
 import { CartProvider } from "@/lib/context/cart-context";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { WhatsAppButton } from "@/components/layout/whatsapp-button";
-import { getCompanySettings } from "@/lib/data/company-settings";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -42,6 +38,14 @@ const noFlashThemeScript = `
 })();
 `;
 
+/**
+ * Root layout for BOTH the public site and /admin — provides <html>/<body>,
+ * language direction, and the app-wide providers (i18n, theme, cart).
+ * Visual chrome (header/footer for the public site, sidebar for admin)
+ * lives one level down in each route group's own layout, so admin no
+ * longer inherits the public Header/Footer — see (site)/layout.tsx and
+ * admin/layout.tsx.
+ */
 export default async function LocaleLayout({
   children,
   params,
@@ -53,7 +57,6 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);
-  const settings = await getCompanySettings();
   const dir = localeDirection[locale];
 
   return (
@@ -64,17 +67,7 @@ export default async function LocaleLayout({
       <body className="min-h-screen bg-bg font-body text-text antialiased">
         <I18nProvider locale={locale} dict={dict}>
           <ThemeProvider>
-            <CartProvider>
-              <div className="flex min-h-screen flex-col">
-                <Header companyNameAr={settings.legalName.ar} brandName={settings.brandName} />
-                <main className="flex-1">{children}</main>
-                <Footer locale={locale} settings={settings} />
-              </div>
-              <WhatsAppButton
-                phone={settings.whatsapp}
-                message={settings.whatsappTemplates.generalInquiry[locale]}
-              />
-            </CartProvider>
+            <CartProvider>{children}</CartProvider>
           </ThemeProvider>
         </I18nProvider>
       </body>

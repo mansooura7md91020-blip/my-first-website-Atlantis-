@@ -56,11 +56,11 @@
     "roll": "roll"
   },
   "home": {
-    "heroEyebrow": "B2B general supplies · Cairo, Egypt",
-    "heroTitle": "Everything your restaurant, café or institution needs — in the right quantity",
-    "heroSubtitle": "Cleaning products, plastics, cups, food packaging and general supplies, priced by the quantity you actually order — from a single carton to a full monthly contract.",
-    "ctaShop": "Browse products",
-    "ctaSupply": "Request a supply quote",
+    "heroEyebrow": "Cleaning & General Supplies · Cairo, Egypt",
+    "heroTitle": "Cleaning & General Supplies for Businesses & Institutions",
+    "heroSubtitle": "Reliable cleaning, plastic and general supplies for restaurants, cafés, schools, hospitals and institutions — priced by the quantity you need.",
+    "ctaShop": "Shop Products",
+    "ctaSupply": "Request Supply Quote",
     "sectorsTitle": "Who we supply",
     "sectorsSubtitle": "From a single café to a multi-branch hospital group.",
     "sectors": {
@@ -112,11 +112,15 @@
     "bulkPricingTitle": "Quantity pricing",
     "minOrder": "Minimum order: {qty} {unit}",
     "descriptionTitle": "Description",
-    "relatedTitle": "You may also need"
+    "relatedTitle": "You may also need",
+    "bulkAvailable": "Bulk pricing available",
+    "startingFrom": "From",
+    "supplyIntro": "For restaurants, cafés, schools, hospitals, universities, companies and institutions ordering bulk quantities or multiple products."
   },
   "categories": {
     "title": "Categories",
-    "suppliesFor": "Supplies for"
+    "suppliesFor": "Supplies for",
+    "subtitle": "Browse our full range of cleaning, plastic and general-supply categories."
   },
   "cart": {
     "title": "Your cart",
@@ -214,5 +218,165 @@
     "contact": "Contact",
     "rights": "All rights reserved.",
     "demoNotice": "This is a demo build of the Atlantis website. Products, prices and content shown are placeholders."
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "categories": "Categories",
+      "orders": "Orders",
+      "supplyRequests": "Supply Requests",
+      "quotations": "Quotations",
+      "customers": "Customers",
+      "settings": "Settings",
+      "viewSite": "View site"
+    },
+    "common": {
+      "addNew": "Add new",
+      "edit": "Edit",
+      "view": "View",
+      "save": "Save changes",
+      "saved": "Saved",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "search": "Search…",
+      "filter": "Filter",
+      "allStatuses": "All statuses",
+      "actions": "Actions",
+      "demoNotice": "This is a UI preview. Data shown is demo data — connect Supabase to make it live.",
+      "noResults": "Nothing here yet.",
+      "currency": "EGP"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Overview of store activity. All figures below are demo data.",
+      "statOrders": "Orders (demo)",
+      "lastSevenDays": "Last 7 days",
+      "statPendingRequests": "Pending supply requests",
+      "statProducts": "Products",
+      "lowStockHint": "{count} low stock",
+      "statOutOfStock": "Out of stock",
+      "recentOrders": "Recent orders",
+      "viewAll": "View all",
+      "supplyRequestsNeedingReview": "Supply requests needing review"
+    },
+    "products": {
+      "title": "Products",
+      "description": "Manage the catalog, images, units and quantity price tiers.",
+      "addProduct": "Add product",
+      "columnProduct": "Product",
+      "columnCategory": "Category",
+      "columnUnit": "Unit",
+      "columnFrom": "From",
+      "columnStock": "Stock",
+      "columnStatus": "Status",
+      "inStock": "In stock",
+      "outOfStock": "Out of stock",
+      "quoteOnly": "Quote only"
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Organize the catalog into browsable sections.",
+      "addCategory": "Add category",
+      "columnCategory": "Category",
+      "columnSlug": "Slug",
+      "columnProducts": "Products",
+      "columnSectors": "Sectors"
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Normal shopping orders placed through the website. Payment terms are set per order, never a fixed policy.",
+      "columnOrder": "Order",
+      "columnCustomer": "Customer",
+      "columnTotal": "Total (EGP)",
+      "columnPaymentTerms": "Payment terms",
+      "columnStatus": "Status",
+      "notYetAgreed": "Not yet agreed",
+      "status": {
+        "received": "Received",
+        "confirmed": "Confirmed",
+        "preparing": "Preparing",
+        "out_for_delivery": "Out for delivery",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      }
+    },
+    "supplyRequests": {
+      "title": "Supply Requests",
+      "description": "Bulk / institutional requests submitted from the public 'Request Supply Quote' form. Review and turn into a quotation.",
+      "itemsLabel": "item(s)",
+      "deliveryLocation": "Delivery location",
+      "requestedDate": "Requested date",
+      "createQuotation": "Create quotation",
+      "markReviewing": "Mark reviewing",
+      "status": {
+        "new": "New",
+        "reviewing": "Reviewing",
+        "quoted": "Quoted",
+        "accepted": "Accepted",
+        "declined": "Declined"
+      }
+    },
+    "quotations": {
+      "title": "Quotations",
+      "description": "Each quotation carries its own payment and delivery terms, agreed with the customer — there is no site-wide default credit period.",
+      "forRequest": "For request",
+      "validUntil": "Valid until",
+      "columnItem": "Item",
+      "columnQty": "Qty",
+      "columnUnitPrice": "Unit price",
+      "columnLineTotal": "Line total",
+      "paymentTermsLabel": "Payment terms (this quotation)",
+      "deliveryTermsLabel": "Delivery terms",
+      "total": "Total",
+      "status": {
+        "draft": "Draft",
+        "sent": "Sent",
+        "accepted": "Accepted",
+        "rejected": "Rejected"
+      }
+    },
+    "customers": {
+      "title": "Customers",
+      "description": "Individuals and business accounts that have ordered or requested quotes.",
+      "columnName": "Name",
+      "columnOrganization": "Organization",
+      "columnPhone": "Phone",
+      "columnEmail": "Email",
+      "columnAccountType": "Account type",
+      "business": "Business",
+      "individual": "Individual"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Everything below is what the public site reads for contact details, WhatsApp messages and payment guidance — nothing is hard-coded in the UI.",
+      "saveChanges": "Save changes",
+      "saved": "Saved ✓",
+      "sectionCompany": "Company information",
+      "legalNameAr": "Legal name (Arabic)",
+      "legalNameEn": "Legal name (English)",
+      "brandName": "Brand name (shown in header)",
+      "sectionContact": "Sales & contact",
+      "salesRepName": "Sales representative name",
+      "salesRepPhone": "Sales representative phone",
+      "companyPhone": "Company phone",
+      "whatsappNumber": "WhatsApp number",
+      "email": "Email",
+      "facebookUrl": "Facebook page URL",
+      "facebookHint": "Leave empty until the real page exists — the footer only shows a Facebook link when this is set.",
+      "sectionPayment": "Payment terms guidance",
+      "paymentNoteHint": "This note is shown to customers as general guidance only. It is never a binding policy — actual terms (deposit, full payment, bank transfer, etc.) are set per order in Orders and per quotation in Quotations.",
+      "noteEnglish": "Note (English)",
+      "noteArabic": "Note (Arabic)",
+      "sectionWhatsapp": "WhatsApp message templates",
+      "templatesHint": "Used to pre-fill wa.me links in v1. Use {orderId} as a placeholder. These become the starting templates for WhatsApp Business API messages once that integration exists.",
+      "templateOrderReceived": "Order received",
+      "templateOrderConfirmed": "Order confirmed",
+      "templateOrderPreparing": "Order preparing",
+      "templateSupplyReceived": "Supply request received",
+      "templateGeneralInquiry": "General inquiry (WhatsApp button)",
+      "english": "English",
+      "arabic": "Arabic"
+    }
   }
 }

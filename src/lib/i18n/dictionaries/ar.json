@@ -56,11 +56,11 @@
     "roll": "رول"
   },
   "home": {
-    "heroEyebrow": "توريدات عمومية للشركات · القاهرة، مصر",
-    "heroTitle": "كل ما يحتاجه مطعمك أو كافيهك أو مؤسستك بالكمية المناسبة",
-    "heroSubtitle": "منتجات تنظيف، بلاستيك، أكواب، عبوات طعام وتوريدات عمومية، بأسعار تتغير حسب الكمية التي تطلبها فعلاً — من كرتونة واحدة إلى عقد توريد شهري كامل.",
-    "ctaShop": "تصفح المنتجات",
-    "ctaSupply": "اطلب عرض سعر توريد",
+    "heroEyebrow": "منظفات وتوريدات عمومية · القاهرة، مصر",
+    "heroTitle": "منظفات وتوريدات للمطاعم والكافيهات والشركات والمؤسسات",
+    "heroSubtitle": "منتجات تنظيف وبلاستيك وتوريدات عمومية موثوقة للمطاعم والكافيهات والمدارس والمستشفيات والمؤسسات — بأسعار تناسب الكمية التي تحتاجها.",
+    "ctaShop": "تسوق المنتجات",
+    "ctaSupply": "اطلب توريد",
     "sectorsTitle": "لمن نورّد",
     "sectorsSubtitle": "من كافيه واحد إلى مجموعة مستشفيات متعددة الفروع.",
     "sectors": {
@@ -112,11 +112,15 @@
     "bulkPricingTitle": "أسعار الكميات",
     "minOrder": "الحد الأدنى للطلب: {qty} {unit}",
     "descriptionTitle": "الوصف",
-    "relatedTitle": "قد تحتاج أيضاً"
+    "relatedTitle": "قد تحتاج أيضاً",
+    "bulkAvailable": "أسعار أفضل للكميات",
+    "startingFrom": "يبدأ من",
+    "supplyIntro": "للمطاعم والكافيهات والمدارس والمستشفيات والجامعات والشركات والمؤسسات التي تطلب كميات كبيرة أو عدة منتجات."
   },
   "categories": {
     "title": "التصنيفات",
-    "suppliesFor": "توريدات لـ"
+    "suppliesFor": "توريدات لـ",
+    "subtitle": "تصفح مجموعتنا الكاملة من تصنيفات منتجات التنظيف والبلاستيك والتوريدات العمومية."
   },
   "cart": {
     "title": "سلة المشتريات",
@@ -214,5 +218,165 @@
     "contact": "التواصل",
     "rights": "جميع الحقوق محفوظة.",
     "demoNotice": "هذه نسخة تجريبية من موقع أطلنتس. المنتجات والأسعار والمحتوى المعروض هو بيانات تجريبية فقط."
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "لوحة التحكم",
+      "products": "المنتجات",
+      "categories": "التصنيفات",
+      "orders": "الطلبات",
+      "supplyRequests": "طلبات التوريد",
+      "quotations": "عروض الأسعار",
+      "customers": "العملاء",
+      "settings": "الإعدادات",
+      "viewSite": "عرض الموقع"
+    },
+    "common": {
+      "addNew": "إضافة جديد",
+      "edit": "تعديل",
+      "view": "عرض",
+      "save": "حفظ التغييرات",
+      "saved": "تم الحفظ",
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "search": "بحث…",
+      "filter": "تصفية",
+      "allStatuses": "كل الحالات",
+      "actions": "إجراءات",
+      "demoNotice": "هذه معاينة للواجهة فقط. البيانات المعروضة تجريبية — قم بربط Supabase لتفعيلها.",
+      "noResults": "لا يوجد شيء هنا بعد.",
+      "currency": "جنيه"
+    },
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "description": "نظرة عامة على نشاط المتجر. جميع الأرقام أدناه بيانات تجريبية.",
+      "statOrders": "الطلبات (تجريبي)",
+      "lastSevenDays": "آخر 7 أيام",
+      "statPendingRequests": "طلبات توريد قيد الانتظار",
+      "statProducts": "المنتجات",
+      "lowStockHint": "{count} بمخزون منخفض",
+      "statOutOfStock": "غير متوفر",
+      "recentOrders": "أحدث الطلبات",
+      "viewAll": "عرض الكل",
+      "supplyRequestsNeedingReview": "طلبات توريد بحاجة للمراجعة"
+    },
+    "products": {
+      "title": "المنتجات",
+      "description": "إدارة الكتالوج والصور والوحدات ومستويات أسعار الكميات.",
+      "addProduct": "إضافة منتج",
+      "columnProduct": "المنتج",
+      "columnCategory": "التصنيف",
+      "columnUnit": "الوحدة",
+      "columnFrom": "يبدأ من",
+      "columnStock": "المخزون",
+      "columnStatus": "الحالة",
+      "inStock": "متوفر",
+      "outOfStock": "غير متوفر",
+      "quoteOnly": "عرض سعر فقط"
+    },
+    "categories": {
+      "title": "التصنيفات",
+      "description": "تنظيم الكتالوج إلى أقسام يسهل تصفحها.",
+      "addCategory": "إضافة تصنيف",
+      "columnCategory": "التصنيف",
+      "columnSlug": "المعرف",
+      "columnProducts": "المنتجات",
+      "columnSectors": "القطاعات"
+    },
+    "orders": {
+      "title": "الطلبات",
+      "description": "طلبات الشراء العادية المقدمة عبر الموقع. يتم تحديد شروط الدفع لكل طلب، وليست سياسة ثابتة.",
+      "columnOrder": "الطلب",
+      "columnCustomer": "العميل",
+      "columnTotal": "الإجمالي (جنيه)",
+      "columnPaymentTerms": "شروط الدفع",
+      "columnStatus": "الحالة",
+      "notYetAgreed": "لم يتم الاتفاق بعد",
+      "status": {
+        "received": "تم الاستلام",
+        "confirmed": "مؤكد",
+        "preparing": "جاري التجهيز",
+        "out_for_delivery": "خارج للتوصيل",
+        "delivered": "تم التسليم",
+        "cancelled": "ملغي"
+      }
+    },
+    "supplyRequests": {
+      "title": "طلبات التوريد",
+      "description": "طلبات الجملة / المؤسسية المرسلة من نموذج \"طلب توريد\" العام. راجعها وحوّلها إلى عرض سعر.",
+      "itemsLabel": "عنصر",
+      "deliveryLocation": "موقع التسليم",
+      "requestedDate": "التاريخ المطلوب",
+      "createQuotation": "إنشاء عرض سعر",
+      "markReviewing": "تحديد كقيد المراجعة",
+      "status": {
+        "new": "جديد",
+        "reviewing": "قيد المراجعة",
+        "quoted": "تم التسعير",
+        "accepted": "مقبول",
+        "declined": "مرفوض"
+      }
+    },
+    "quotations": {
+      "title": "عروض الأسعار",
+      "description": "كل عرض سعر له شروط دفع وتسليم خاصة به يتم الاتفاق عليها مع العميل — لا توجد مدة ائتمان افتراضية على مستوى الموقع.",
+      "forRequest": "لطلب رقم",
+      "validUntil": "صالح حتى",
+      "columnItem": "الصنف",
+      "columnQty": "الكمية",
+      "columnUnitPrice": "سعر الوحدة",
+      "columnLineTotal": "إجمالي البند",
+      "paymentTermsLabel": "شروط الدفع (لهذا العرض)",
+      "deliveryTermsLabel": "شروط التسليم",
+      "total": "الإجمالي",
+      "status": {
+        "draft": "مسودة",
+        "sent": "تم الإرسال",
+        "accepted": "مقبول",
+        "rejected": "مرفوض"
+      }
+    },
+    "customers": {
+      "title": "العملاء",
+      "description": "الأفراد والحسابات التجارية التي قامت بالطلب أو طلبت عروض أسعار.",
+      "columnName": "الاسم",
+      "columnOrganization": "المؤسسة",
+      "columnPhone": "الهاتف",
+      "columnEmail": "البريد الإلكتروني",
+      "columnAccountType": "نوع الحساب",
+      "business": "تجاري",
+      "individual": "فردي"
+    },
+    "settings": {
+      "title": "الإعدادات",
+      "description": "كل ما يلي هو ما يعرضه الموقع العام من بيانات تواصل ورسائل واتساب وإرشادات دفع — لا شيء مُثبت داخل الواجهة.",
+      "saveChanges": "حفظ التغييرات",
+      "saved": "تم الحفظ ✓",
+      "sectionCompany": "بيانات الشركة",
+      "legalNameAr": "الاسم القانوني (عربي)",
+      "legalNameEn": "الاسم القانوني (إنجليزي)",
+      "brandName": "اسم العلامة (يظهر في الهيدر)",
+      "sectionContact": "المبيعات والتواصل",
+      "salesRepName": "اسم مندوب المبيعات",
+      "salesRepPhone": "هاتف مندوب المبيعات",
+      "companyPhone": "هاتف الشركة",
+      "whatsappNumber": "رقم واتساب",
+      "email": "البريد الإلكتروني",
+      "facebookUrl": "رابط صفحة فيسبوك",
+      "facebookHint": "اتركه فارغاً حتى تتوفر الصفحة الفعلية — يظهر رابط فيسبوك في الفوتر فقط عند تعيين هذا الحقل.",
+      "sectionPayment": "إرشادات شروط الدفع",
+      "paymentNoteHint": "تُعرض هذه الملاحظة للعملاء كإرشاد عام فقط، وليست سياسة ملزمة — يتم تحديد الشروط الفعلية (عربون، دفع كامل، تحويل بنكي، إلخ) لكل طلب من صفحة الطلبات ولكل عرض سعر من صفحة عروض الأسعار.",
+      "noteEnglish": "الملاحظة (إنجليزي)",
+      "noteArabic": "الملاحظة (عربي)",
+      "sectionWhatsapp": "قوالب رسائل واتساب",
+      "templatesHint": "تُستخدم لتعبئة روابط wa.me مسبقاً في النسخة الأولى. استخدم {orderId} كعنصر نائب. ستصبح هذه القوالب نقطة البداية لرسائل واتساب بزنس عند ربطها لاحقاً.",
+      "templateOrderReceived": "تم استلام الطلب",
+      "templateOrderConfirmed": "تم تأكيد الطلب",
+      "templateOrderPreparing": "جاري تجهيز الطلب",
+      "templateSupplyReceived": "تم استلام طلب التوريد",
+      "templateGeneralInquiry": "استفسار عام (زر واتساب)",
+      "english": "إنجليزي",
+      "arabic": "عربي"
+    }
   }
 }

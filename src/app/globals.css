@@ -1,76 +1,112 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------
-   ATLANTIS DESIGN TOKENS
-   Ocean-depth identity: deep teal + foam white + a single sand-gold
-   accent. Dark mode mirrors the same hues at lower luminance.
+   ATLANTIS DESIGN SYSTEM — v2 (corporate redesign)
+
+   Concept: "The Twin Pillars" — Atlantis mythology's gateway pillars,
+   rendered as a disciplined, deep-teal corporate identity with a
+   single warm bronze accent. Light and dark are each designed with
+   their own surface hierarchy — dark mode is NOT an inversion of
+   light mode.
 ----------------------------------------------------------------*/
 :root {
-  --color-ocean-950: #06181a;
-  --color-ocean-900: #0b3d42;
-  --color-ocean-800: #0f4d53;
-  --color-ocean-700: #147d82;
-  --color-ocean-600: #1a9aa0;
-  --color-ocean-100: #e3f1f0;
-  --color-ocean-50: #f2f8f7;
+  /* Brand hue family (teal) */
+  --teal-950: #061a1c;
+  --teal-900: #0a2a2d;
+  --teal-800: #0d3a3e;
+  --teal-700: #0f5257;
+  --teal-600: #146a70;
+  --teal-500: #1c8288;
+  --teal-200: #bfe0e0;
+  --teal-100: #dceeee;
+  --teal-50: #f2f8f8;
 
-  --color-ink-900: #0a2540;
-  --color-slate-600: #5b6b6c;
-  --color-slate-400: #8b9b9c;
+  /* Accent hue family (bronze / warm gold — muted, premium) */
+  --bronze-700: #8a5f22;
+  --bronze-600: #a8752b;
+  --bronze-500: #c08829;
+  --bronze-400: #d19d3f;
 
-  --color-sand-500: #d9a441;
-  --color-sand-600: #b9862a;
+  /* Neutrals */
+  --gray-950: #0d1416;
+  --gray-900: #14262a;
+  --gray-700: #3c4f52;
+  --gray-500: #5b6e70;
+  --gray-300: #a9b8b9;
+  --gray-200: #dce4e3;
+  --gray-100: #eef3f2;
+  --gray-50: #f7f9f9;
 
-  --color-foam: #f7faf9;
-  --color-white: #ffffff;
+  --success: #1f8a5f;
+  --danger: #c1453a;
 
-  --color-success: #1f8a5f;
-  --color-danger: #c4453a;
+  /* ---- Semantic tokens: LIGHT MODE ---- */
+  --bg: var(--gray-50);
+  --surface: #ffffff;
+  --surface-muted: var(--gray-100);
+  --surface-raised: #ffffff;
+  --text: var(--gray-900);
+  --text-muted: var(--gray-500);
+  --text-on-brand: #ffffff;
+  --border: var(--gray-200);
+  --border-strong: var(--gray-300);
 
-  --bg: var(--color-foam);
-  --surface: var(--color-white);
-  --surface-muted: var(--color-ocean-50);
-  --text: var(--color-ink-900);
-  --text-muted: var(--color-slate-600);
-  --border: #dde6e5;
-  --brand: var(--color-ocean-700);
-  --brand-strong: var(--color-ocean-900);
-  --accent: var(--color-sand-500);
-  --accent-strong: var(--color-sand-600);
+  --brand: var(--teal-700);
+  --brand-strong: var(--teal-900);
+  --brand-soft: var(--teal-50);
+  --accent: var(--bronze-500);
+  --accent-strong: var(--bronze-700);
+  --accent-soft: #f7ecd9;
 
-  /* Font stacks. Swap for next/font/google (Manrope + Tajawal for display,
-     Inter + Tajawal for body) once deployed with internet access — see
-     README "Fonts" section. System fallbacks keep local builds working. */
+  --shadow-color: 200 30% 20%;
+
+  /* Font stacks — swap for next/font/google (Manrope + Tajawal display,
+     Inter + Tajawal body) once deployed with internet access. */
   --font-heading: Manrope, Tajawal, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
   --font-body: Inter, Tajawal, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
 }
 
+/* ---- Semantic tokens: DARK MODE (independently designed) ---- */
 .dark {
-  --bg: #081a1c;
-  --surface: #0f2a2d;
-  --surface-muted: #0c2225;
-  --text: #e8f1ef;
-  --text-muted: #9fb4b3;
-  --border: #1d3a3d;
-  --brand: var(--color-ocean-600);
-  --brand-strong: var(--color-ocean-100);
-  --accent: var(--color-sand-500);
-  --accent-strong: #e6b95c;
+  --bg: #081416;
+  --surface: #102327;
+  --surface-muted: #0b1b1e;
+  --surface-raised: #142a2f;
+  --text: #e7eeec;
+  --text-muted: #8fa6a5;
+  --text-on-brand: #ffffff;
+  --border: #1e3236;
+  --border-strong: #2a4448;
+
+  --brand: #3ba7ad;
+  --brand-strong: #8fd6d9;
+  --brand-soft: #0f2a2d;
+  --accent: #d9a047;
+  --accent-strong: #f0c06e;
+  --accent-soft: #26200f;
+
+  --success: #34a97a;
+  --danger: #e2695e;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
+  --color-text-on-brand: var(--text-on-brand);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
-  --color-success: var(--color-success);
-  --color-danger: var(--color-danger);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
   --font-display: var(--font-heading), sans-serif;
   --font-body: var(--font-body), sans-serif;
 }
@@ -88,14 +124,32 @@ body {
   color: var(--color-text);
   font-family: var(--font-body), sans-serif;
   font-feature-settings: "tnum" 1, "cv11" 1;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, .font-display {
   font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] .font-display {
+  letter-spacing: 0;
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+.card-shadow {
+  box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.06), 0 8px 24px -8px hsl(var(--shadow-color) / 0.12);
+}
+
+.card-shadow-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-shadow-hover:hover {
+  box-shadow: 0 4px 10px hsl(var(--shadow-color) / 0.08), 0 16px 32px -12px hsl(var(--shadow-color) / 0.18);
+  transform: translateY(-2px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -105,12 +159,15 @@ h1, h2, h3, h4, .font-display {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .card-shadow-hover:hover {
+    transform: none;
+  }
 }
 
 :focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .wave-divider {
@@ -122,4 +179,22 @@ h1, h2, h3, h4, .font-display {
 
 [dir="rtl"] .flip-x {
   transform: scaleX(-1);
+}
+
+/* Skeleton loading shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-muted);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.08), transparent);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
 }

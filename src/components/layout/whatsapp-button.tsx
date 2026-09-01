@@ -26,9 +26,9 @@ export function WhatsAppButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+        className="card-shadow inline-flex items-center gap-2.5 rounded-xl bg-[#1FAF5C] px-5 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#1c9e53]"
       >
-        <WhatsAppIcon className="h-4 w-4" />
+        <WhatsAppIcon className="h-4.5 w-4.5" />
         {t("common.whatsappUs")}
       </a>
     );
@@ -40,9 +40,9 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t("common.whatsappUs")}
-      className="fixed bottom-5 end-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105"
+      className="fixed bottom-5 end-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#1FAF5C] text-white shadow-[0_8px_24px_-6px_rgba(31,175,92,0.55)] transition-transform hover:scale-105"
     >
-      <WhatsAppIcon className="h-7 w-7" />
+      <WhatsAppIcon className="h-6.5 w-6.5" />
     </a>
   );
 }

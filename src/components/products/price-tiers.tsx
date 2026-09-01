@@ -3,12 +3,9 @@ import { formatEGP } from "@/lib/utils/pricing";
 import { useI18nServer } from "@/lib/i18n/server-t";
 
 const depthLabels = ["surface", "reef", "deep", "abyss"] as const;
-const depthShades = [
-  "bg-ocean-100/60",
-  "bg-[color-mix(in_srgb,var(--brand)_18%,var(--surface))]",
-  "bg-[color-mix(in_srgb,var(--brand)_38%,var(--surface))]",
-  "bg-[color-mix(in_srgb,var(--brand-strong)_60%,var(--surface))]",
-];
+// Fixed teal depth scale (independent of light/dark theme) so the
+// "deeper = better price" visual always reads the same way.
+const depthColors = ["#1c8288", "#146a70", "#0f5257", "#0a2a2d"];
 
 /**
  * Renders a product's quantity-based price ladder as depth "bands" —
@@ -30,21 +27,19 @@ export async function PriceTiers({
     <div className="overflow-hidden rounded-xl border border-border">
       {tiers.map((tier, i) => {
         const label = depthLabels[Math.min(i, depthLabels.length - 1)];
-        const isDeepest = i === tiers.length - 1;
-        const rangeText =
-          tier.maxQty === null
-            ? `${tier.minQty}+`
-            : `${tier.minQty}–${tier.maxQty}`;
+        const rangeText = tier.maxQty === null ? `${tier.minQty}+` : `${tier.minQty}–${tier.maxQty}`;
 
         return (
           <div
             key={i}
-            className={`flex items-center justify-between gap-4 px-4 py-3.5 ${depthShades[Math.min(i, depthShades.length - 1)]} ${
-              isDeepest ? "text-white" : "text-text"
-            } ${i > 0 ? "border-t border-white/10" : ""}`}
+            className="flex items-center justify-between gap-4 px-4 py-3.5 text-white"
+            style={{
+              backgroundColor: depthColors[Math.min(i, depthColors.length - 1)],
+              borderTop: i > 0 ? "1px solid rgba(255,255,255,0.12)" : undefined,
+            }}
           >
             <div className="flex items-center gap-3">
-              <span className={`text-[11px] font-semibold uppercase tracking-wide ${isDeepest ? "text-white/70" : "text-text-muted"}`}>
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-white/65">
                 {t(`home.depthLayers.${label}`)}
               </span>
               <span className="tabular text-sm font-medium">
@@ -56,7 +51,9 @@ export async function PriceTiers({
                 {t("common.egp")} {formatEGP(tier.pricePerUnit, locale)}
               </span>
             ) : (
-              <span className="text-sm font-semibold text-accent">{t("common.requestQuote")}</span>
+              <span className="text-sm font-semibold text-accent-strong" style={{ color: "#f0c06e" }}>
+                {t("common.requestQuote")}
+              </span>
             )}
           </div>
         );
