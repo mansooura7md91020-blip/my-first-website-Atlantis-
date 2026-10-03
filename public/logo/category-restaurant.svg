@@ -1,6 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160">
-  <rect width="200" height="160" rx="14" fill="#F2F8F8"/>
-  <g stroke="#0F5257" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="66" cy="42" r="4" fill="#0F5257" stroke="none"/><path d="M66 46 v50"/><path d="M55 38 v18"/><path d="M77 38 v18"/><path d="M55 38 q11 -5 22 0"/><path d="M134 38 c-11 0 -16 9 -16 20 s5 16 16 16 v26" /><circle cx="134" cy="42" r="0" /><path d="M126 42 c0 8 4 12 8 12" stroke="#C08829"/>
+  <defs>
+    <radialGradient id="bg53459" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E4EAEE"/>
+    </radialGradient>
+    <radialGradient id="sh53459" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D2C49" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0D2C49" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="160" rx="14" fill="url(#bg53459)"/>
+  <ellipse cx="100.0" cy="137.6" rx="60.0" ry="7.2" fill="url(#sh53459)"/>
+  <g stroke="#0D2C49" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <circle cx="66" cy="42" r="4" fill="#0D2C49" stroke="none"/><path d="M66 46 v50"/><path d="M55 38 v18"/><path d="M77 38 v18"/><path d="M55 38 q11 -5 22 0"/><path d="M134 38 c-11 0 -16 9 -16 20 s5 16 16 16 v26" /><circle cx="134" cy="42" r="0" /><path d="M126 42 c0 8 4 12 8 12" stroke="#2EA75F"/>
+  
   </g>
 </svg>

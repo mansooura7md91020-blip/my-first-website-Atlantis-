@@ -1,22 +1,20 @@
 import { cn } from "@/lib/utils/cn";
 
 /**
- * ATLANTIS mark — "The Keystone"
+ * ATLANTIS SUPPLIES mark.
  *
- * A geometric monogram "A" built from two converging strokes and a
- * crossbar, capped by a faceted keystone at the apex — the load-bearing
- * stone that locks an arch in place. It reads as engineering/structure
- * (fit for a B2B supply business) and doubles as a nod to Atlantis
- * without leaning on a literal wave or ocean cliché. The mark is a
- * single confident shape that stays legible at favicon size and
- * reduces cleanly to one flat color for print/quotation documents.
+ * A monogram "A" built as a droplet/shield silhouette (cleanliness,
+ * liquid, protection) with the right stroke resolving into a small
+ * leaf (freshness/hygiene) and a three-point sparkle at the apex
+ * (shine/clean result) — three simple, legible shapes rather than a
+ * crowded scene, so it still reads clearly at favicon size. Blue
+ * carries the corporate/trust weight, green carries the
+ * cleanliness/freshness meaning.
  *
- * `tone="badge"` (default) sits on a rounded-square brand-colored tile
- * and auto-adapts between light/dark via CSS variables. `tone="on-brand"`
- * strips the tile for use on an already-colored surface (e.g. the hero
- * or the footer). `tone="mono"` renders as a single flat `currentColor`
- * shape with no fill tile — for print, quotation PDFs, or any context
- * where only one color is guaranteed.
+ * `tone="badge"` sits on a rounded tile and auto-adapts light/dark via
+ * CSS variables. `tone="on-brand"` strips the tile for use on an
+ * already-colored surface. `tone="mono"` is a single flat
+ * `currentColor` shape for print/quotation documents.
  */
 export function LogoMark({
   className,
@@ -29,13 +27,13 @@ export function LogoMark({
     return (
       <svg viewBox="0 0 48 48" fill="none" className={cn("h-8 w-8", className)} aria-hidden="true">
         <path
-          d="M14 37 24 15.5M34 37 24 15.5M18.4 27h11.2"
+          d="M24 8c6 7 11 12.7 11 18.5A11 11 0 0 1 13 26.5C13 20.7 18 15 24 8Z"
           stroke="currentColor"
-          strokeWidth="3.1"
-          strokeLinecap="round"
+          strokeWidth="2.6"
           strokeLinejoin="round"
         />
-        <path d="M24 7.5 28.3 11.5 24 15.5 19.7 11.5Z" fill="currentColor" />
+        <path d="M24 17v15M18.5 27h11" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+        <path d="M31.5 15.5c2.6 0 4 1.6 4 4-2.6 0-4-1.6-4-4Z" fill="currentColor" />
       </svg>
     );
   }
@@ -44,13 +42,14 @@ export function LogoMark({
     return (
       <svg viewBox="0 0 48 48" fill="none" className={cn("h-8 w-8", className)} aria-hidden="true">
         <path
-          d="M14 37 24 15.5M34 37 24 15.5M18.4 27h11.2"
+          d="M24 8c6 7 11 12.7 11 18.5A11 11 0 0 1 13 26.5C13 20.7 18 15 24 8Z"
+          fill="rgba(255,255,255,0.12)"
           stroke="#fff"
-          strokeWidth="3.1"
-          strokeLinecap="round"
+          strokeWidth="2.4"
           strokeLinejoin="round"
         />
-        <path d="M24 7.5 28.3 11.5 24 15.5 19.7 11.5Z" fill="#D9A047" />
+        <path d="M24 17v15M18.5 27h11" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" />
+        <path d="M31.5 15.5c2.6 0 4 1.6 4 4-2.6 0-4-1.6-4-4Z" fill="#5ED993" />
       </svg>
     );
   }
@@ -59,13 +58,12 @@ export function LogoMark({
     <svg viewBox="0 0 48 48" fill="none" className={cn("h-8 w-8", className)} aria-hidden="true">
       <rect width="48" height="48" rx="12" fill="var(--brand-strong)" />
       <path
-        d="M14 37 24 15.5M34 37 24 15.5M18.4 27h11.2"
-        stroke="var(--surface)"
-        strokeWidth="3.1"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M24 10c5.2 6 9.5 10.9 9.5 16A9.5 9.5 0 0 1 14.5 26C14.5 20.9 18.8 16 24 10Z"
+        fill="var(--surface)"
+        opacity="0.96"
       />
-      <path d="M24 7.5 28.3 11.5 24 15.5 19.7 11.5Z" fill="var(--accent)" />
+      <path d="M24 18v11.5M19.7 25.5h8.6" stroke="var(--brand-strong)" strokeWidth="2.3" strokeLinecap="round" />
+      <path d="M30.5 16.8c2.3 0 3.5 1.4 3.5 3.5-2.3 0-3.5-1.4-3.5-3.5Z" fill="var(--accent)" />
     </svg>
   );
 }
@@ -83,28 +81,25 @@ export function Logo({
   companyNameAr: string;
   brandName: string;
   tone?: "badge" | "on-brand" | "mono";
-  /** "full" shows the wordmark + Arabic subtitle; "mark-only" shows just the icon. */
+  /** "full" shows the ATLANTIS / SUPPLIES wordmark stack; "mark-only" shows just the icon. */
   variant?: "full" | "mark-only";
 }) {
   if (variant === "mark-only") return <LogoMark className={className} tone={tone} />;
 
   const textColor = tone === "on-brand" ? "text-white" : tone === "mono" ? "text-current" : "text-text";
-  const subColor = tone === "on-brand" ? "text-white/65" : tone === "mono" ? "text-current opacity-60" : "text-text-muted";
+  const subColor =
+    tone === "on-brand" ? "text-[#5ED993]" : tone === "mono" ? "text-current opacity-70" : "text-accent-strong";
 
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
+    <span className={cn("inline-flex items-center gap-2.5", className)} title={companyNameAr}>
       <LogoMark tone={tone} />
       <span className="flex flex-col leading-none">
         <span
-          className={cn(
-            "font-display text-lg font-bold tracking-[0.04em]",
-            textColor,
-            wordmarkClassName
-          )}
+          className={cn("font-display text-lg font-bold tracking-[0.06em]", textColor, wordmarkClassName)}
         >
-          {brandName}
+          ATLANTIS
         </span>
-        <span className={cn("mt-0.5 text-[11px]", subColor)}>{companyNameAr}</span>
+        <span className={cn("mt-0.5 text-[10px] font-semibold tracking-[0.22em]", subColor)}>SUPPLIES</span>
       </span>
     </span>
   );

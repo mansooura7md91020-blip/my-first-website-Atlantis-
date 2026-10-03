@@ -1,6 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
-  <rect width="320" height="320" rx="20" fill="#F2F8F8"/>
-  <g stroke="#0F5257" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M110 90 v70 q0 14 14 14 v76" /><path d="M96 90 v40 M110 90 v40 M124 90 v40" /><path d="M180 90 c-16 0 -22 14 -22 30 s6 26 22 26 v104" stroke="#C08829"/><path d="M220 90 l-14 60 q-4 16 10 20 v80" />
+  <defs>
+    <radialGradient id="bg4932" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E4EAEE"/>
+    </radialGradient>
+    <radialGradient id="sh4932" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D2C49" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0D2C49" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="320" rx="20" fill="url(#bg4932)"/>
+  <ellipse cx="160.0" cy="275.2" rx="96.0" ry="14.4" fill="url(#sh4932)"/>
+  <g stroke="#0D2C49" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M110 90 v70 q0 14 14 14 v76" /><path d="M96 90 v40 M110 90 v40 M124 90 v40" /><path d="M180 90 c-16 0 -22 14 -22 30 s6 26 22 26 v104" stroke="#2EA75F"/><path d="M220 90 l-14 60 q-4 16 10 20 v80" />
+  
   </g>
 </svg>

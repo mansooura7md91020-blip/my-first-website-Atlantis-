@@ -102,7 +102,9 @@
     "process3Title": "You confirm the agreement",
     "process3Body": "Payment terms and delivery schedule are agreed together with you.",
     "process4Title": "We deliver",
-    "process4Body": "Your order is prepared and delivered as agreed."
+    "process4Body": "Your order is prepared and delivered as agreed.",
+    "heroServingLabel": "Serving",
+    "heroServingList": "Restaurants • Cafés • Schools • Hospitals • Companies • Institutions"
   },
   "products": {
     "title": "Products",

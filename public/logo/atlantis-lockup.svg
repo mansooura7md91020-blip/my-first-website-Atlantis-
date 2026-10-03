@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none">
-  <rect width="64" height="64" rx="14" fill="#0A2A2D" />
-  <path d="M20 49 32 21M44 49 32 21M25 34h14" stroke="#F7F9F9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M32 11 37.6 16 32 21 26.4 16Z" fill="#C08829" />
-  <text x="80" y="32" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="1.5" fill="#0A2A2D">ATLANTIS</text>
-  <text x="80" y="52" font-family="Arial, sans-serif" font-size="14" fill="#5B6E70">أطلنتس للتوريدات العموميه</text>
-</svg>

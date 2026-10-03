@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" fill="none">
+  <rect width="64" height="64" y="6" rx="16" fill="#0D2C49"/>
+  <path d="M32 18c7 8 12.5 14.5 12.5 21A12.5 12.5 0 0 1 19.5 39C19.5 32.5 25 26 32 18Z" fill="#FFFFFF"/>
+  <path d="M32 28v15M25 35h14" stroke="#0D2C49" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M40 26c3 0 4.6 1.8 4.6 4.6-3 0-4.6-1.8-4.6-4.6Z" fill="#2EA75F"/>
+  <text x="84" y="42" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="2" fill="#0D2C49">ATLANTIS</text>
+  <text x="85" y="60" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" letter-spacing="4.5" fill="#1F7A45">SUPPLIES</text>
+  <text x="85" y="80" font-family="Arial, Helvetica, sans-serif" font-size="12.5" fill="#5B6E70">Clean Spaces &#8226; Better Choices</text>
+</svg>

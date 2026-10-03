@@ -11,7 +11,7 @@ export async function Footer({ locale, settings }: { locale: Locale; settings: C
   const t = (key: string) => key.split(".").reduce<any>((acc, k) => acc?.[k], dict) ?? key;
 
   return (
-    <footer className="mt-20 border-t border-border bg-[var(--teal-900)] text-white">
+    <footer className="mt-20 border-t border-border bg-[var(--blue-900)] text-white">
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Logo companyNameAr={settings.legalName.ar} brandName={settings.brandName} tone="on-brand" />

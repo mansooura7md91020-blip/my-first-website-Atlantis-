@@ -3,29 +3,28 @@
 /* ---------------------------------------------------------------
    ATLANTIS DESIGN SYSTEM — v2 (corporate redesign)
 
-   Concept: "The Twin Pillars" — Atlantis mythology's gateway pillars,
-   rendered as a disciplined, deep-teal corporate identity with a
-   single warm bronze accent. Light and dark are each designed with
-   their own surface hierarchy — dark mode is NOT an inversion of
+   Concept: "Atlantis Supplies" — corporate blue for trust/reliability,
+   fresh green for cleanliness/hygiene. Light and dark are each designed
+   with their own surface hierarchy — dark mode is NOT an inversion of
    light mode.
 ----------------------------------------------------------------*/
 :root {
-  /* Brand hue family (teal) */
-  --teal-950: #061a1c;
-  --teal-900: #0a2a2d;
-  --teal-800: #0d3a3e;
-  --teal-700: #0f5257;
-  --teal-600: #146a70;
-  --teal-500: #1c8288;
-  --teal-200: #bfe0e0;
-  --teal-100: #dceeee;
-  --teal-50: #f2f8f8;
+  /* Brand hue family (corporate blue) */
+  --blue-950: #071b2e;
+  --blue-900: #0d2c49;
+  --blue-800: #123b63;
+  --blue-700: #17507f;
+  --blue-600: #1f6699;
+  --blue-500: #2c80b8;
+  --blue-200: #bfdcef;
+  --blue-100: #dcebf5;
+  --blue-50: #f2f8fc;
 
-  /* Accent hue family (bronze / warm gold — muted, premium) */
-  --bronze-700: #8a5f22;
-  --bronze-600: #a8752b;
-  --bronze-500: #c08829;
-  --bronze-400: #d19d3f;
+  /* Accent hue family (fresh green — cleanliness/hygiene) */
+  --green-700: #1f7a45;
+  --green-600: #269153;
+  --green-500: #2ea75f;
+  --green-400: #4fc17e;
 
   /* Neutrals */
   --gray-950: #0d1416;
@@ -51,14 +50,14 @@
   --border: var(--gray-200);
   --border-strong: var(--gray-300);
 
-  --brand: var(--teal-700);
-  --brand-strong: var(--teal-900);
-  --brand-soft: var(--teal-50);
-  --accent: var(--bronze-500);
-  --accent-strong: var(--bronze-700);
-  --accent-soft: #f7ecd9;
+  --brand: var(--blue-700);
+  --brand-strong: var(--blue-900);
+  --brand-soft: var(--blue-50);
+  --accent: var(--green-500);
+  --accent-strong: var(--green-700);
+  --accent-soft: #e6f5ec;
 
-  --shadow-color: 200 30% 20%;
+  --shadow-color: 210 35% 20%;
 
   /* Font stacks — swap for next/font/google (Manrope + Tajawal display,
      Inter + Tajawal body) once deployed with internet access. */
@@ -68,22 +67,22 @@
 
 /* ---- Semantic tokens: DARK MODE (independently designed) ---- */
 .dark {
-  --bg: #081416;
-  --surface: #102327;
-  --surface-muted: #0b1b1e;
-  --surface-raised: #142a2f;
-  --text: #e7eeec;
-  --text-muted: #8fa6a5;
+  --bg: #071620;
+  --surface: #0f2438;
+  --surface-muted: #0a1c2c;
+  --surface-raised: #13293f;
+  --text: #e9f1f7;
+  --text-muted: #8ea3b5;
   --text-on-brand: #ffffff;
-  --border: #1e3236;
-  --border-strong: #2a4448;
+  --border: #1c3448;
+  --border-strong: #294a62;
 
-  --brand: #3ba7ad;
-  --brand-strong: #8fd6d9;
-  --brand-soft: #0f2a2d;
-  --accent: #d9a047;
-  --accent-strong: #f0c06e;
-  --accent-soft: #26200f;
+  --brand: #4f9fd6;
+  --brand-strong: #a9d4ef;
+  --brand-soft: #0d2436;
+  --accent: #4fc17e;
+  --accent-strong: #7ad9a0;
+  --accent-soft: #12261a;
 
   --success: #34a97a;
   --danger: #e2695e;

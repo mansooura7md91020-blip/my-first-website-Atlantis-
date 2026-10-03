@@ -1,6 +1,7 @@
 import { Locale } from "@/lib/types";
 import { isLocale } from "@/lib/i18n/config";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { useI18nServer } from "@/lib/i18n/server-t";
 import { Container, SectionHeading, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
@@ -22,8 +23,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* HERO — fixed dark teal band regardless of theme, for a consistent premium first screen */}
-      <section className="relative overflow-hidden bg-[var(--teal-900)]">
-        <TwinPillarsBackdrop />
+      <section className="relative overflow-hidden bg-[var(--blue-900)]">
+        <HeroBackdrop />
         <Container className="relative z-10 grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:py-24">
           <div>
             <Badge tone="accent" className="mb-5">
@@ -35,7 +36,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <p className="mt-4 max-w-lg text-base leading-relaxed text-white/70">
               {t("home.heroSubtitle")}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <p className="mt-3 text-sm text-white/55">
+              <span className="font-semibold text-white/75">{t("home.heroServingLabel")}: </span>
+              {t("home.heroServingList")}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <LinkButton href={`/${locale}/products`} variant="accent" size="lg">
                 {t("home.ctaShop")}
               </LinkButton>
@@ -47,6 +52,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               >
                 {t("home.ctaSupply")}
               </LinkButton>
+              <Link
+                href={`/${locale}/contact`}
+                className="text-sm font-medium text-white/75 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
+              >
+                {t("nav.contact")}
+              </Link>
             </div>
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-white/10 pt-6">
               {(
@@ -63,7 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </dl>
           </div>
-          <HeroPillarsArt />
+          <HeroDropletArt />
         </Container>
       </section>
 
@@ -126,7 +137,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 key={label}
                 className="flex items-center justify-between px-5 py-4 text-white"
                 style={{
-                  backgroundColor: ["#1c8288", "#146a70", "#0f5257", "#0a2a2d"][i],
+                  backgroundColor: ["#2c80b8", "#1f6699", "#17507f", "#0d2c49"][i],
                   borderTop: i > 0 ? "1px solid rgba(255,255,255,0.12)" : undefined,
                 }}
               >
@@ -172,7 +183,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* WHY US */}
-      <section className="bg-[var(--teal-900)] py-14 text-white sm:py-20">
+      <section className="bg-[var(--blue-900)] py-14 text-white sm:py-20">
         <Container>
           <SectionHeading title={t("home.whyTitle")} align="center" />
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
@@ -205,33 +216,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   );
 }
 
-function TwinPillarsBackdrop() {
+function HeroBackdrop() {
+  // Faint repeating droplet motif — echoes the logo mark without competing with the headline.
   return (
     <svg
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]"
+      className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.05]"
       viewBox="0 0 800 400"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
-      <path d="M60 0v400M120 0v400M680 0v400M740 0v400" stroke="white" strokeWidth="3" />
-      <path d="M30 60h60M710 60h60" stroke="white" strokeWidth="3" />
+      {[80, 260, 440, 620, 760].map((x, i) => (
+        <path
+          key={x}
+          d={`M${x} ${20 + (i % 2) * 200}c14 16 25 29 25 42a25 25 0 0 1-50 0c0-13 11-26 25-42Z`}
+          fill="white"
+        />
+      ))}
     </svg>
   );
 }
 
-function HeroPillarsArt() {
+function HeroDropletArt() {
+  // Large-scale version of the logo's droplet-shield + leaf-stem + sparkle motif.
   return (
     <div className="relative mx-auto hidden aspect-[4/3] w-full max-w-md lg:block">
       <svg viewBox="0 0 400 300" className="h-full w-full">
-        <rect x="60" y="40" width="280" height="220" rx="16" fill="rgba(255,255,255,0.04)" />
-        <g stroke="rgba(255,255,255,0.5)" strokeWidth="6" strokeLinecap="round">
-          <path d="M110 90h180" />
-          <path d="M130 90v150" />
-          <path d="M270 90v150" />
-        </g>
-        <path d="M90 250h220" stroke="#D9A047" strokeWidth="5" strokeLinecap="round" />
-        <path d="M90 268h220" stroke="rgba(255,255,255,0.2)" strokeWidth="5" strokeLinecap="round" />
-        <circle cx="200" cy="130" r="26" fill="#D9A047" />
+        <rect x="60" y="30" width="280" height="240" rx="20" fill="rgba(255,255,255,0.04)" />
+        <path
+          d="M200 60c46 52 80 94 80 134a80 80 0 0 1-160 0c0-40 34-82 80-134Z"
+          fill="rgba(255,255,255,0.08)"
+          stroke="rgba(255,255,255,0.55)"
+          strokeWidth="4"
+        />
+        <path d="M200 118v96M162 166h76" stroke="rgba(255,255,255,0.65)" strokeWidth="5" strokeLinecap="round" />
+        <path d="M252 96c18 0 28 11 28 28-18 0-28-11-28-28Z" fill="#4fc17e" />
       </svg>
     </div>
   );

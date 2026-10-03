@@ -5,7 +5,7 @@ import { useI18nServer } from "@/lib/i18n/server-t";
 const depthLabels = ["surface", "reef", "deep", "abyss"] as const;
 // Fixed teal depth scale (independent of light/dark theme) so the
 // "deeper = better price" visual always reads the same way.
-const depthColors = ["#1c8288", "#146a70", "#0f5257", "#0a2a2d"];
+const depthColors = ["#2c80b8", "#1f6699", "#17507f", "#0d2c49"];
 
 /**
  * Renders a product's quantity-based price ladder as depth "bands" —
@@ -51,7 +51,7 @@ export async function PriceTiers({
                 {t("common.egp")} {formatEGP(tier.pricePerUnit, locale)}
               </span>
             ) : (
-              <span className="text-sm font-semibold text-accent-strong" style={{ color: "#f0c06e" }}>
+              <span className="text-sm font-semibold text-accent-strong" style={{ color: "#7ad9a0" }}>
                 {t("common.requestQuote")}
               </span>
             )}
