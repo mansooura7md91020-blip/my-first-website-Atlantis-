@@ -20,7 +20,7 @@ export const products: Product[] = [
       ar: "مطهر أسطح فعال يقضي على 99.9% من الجراثيم، مناسب للاستخدام التجاري في المطاعم والمستشفيات والمدارس. يأتي في عبوة 5 لتر اقتصادية.",
       en: "An effective surface disinfectant that eliminates 99.9% of germs. Suited for commercial use in restaurants, hospitals and schools. Comes in an economical 5-liter container.",
     },
-    images: ["https://images.pexels.com/photos/4440564/pexels-photo-4440564.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/disinfectant-5l.svg"],
     unit: "liter",
     minOrderQty: 5,
     priceTiers: [
@@ -45,7 +45,7 @@ export const products: Product[] = [
       ar: "أكواب ورقية عالية الجودة مقاومة للتسرب، مثالية للكافيهات والمطاعم. تُباع بالكرتونة الواحدة تحتوي على 20 عبوة (1000 كوب).",
       en: "High-quality leak-resistant paper cups, ideal for cafés and restaurants. Sold by the carton — 20 packs of 50 cups (1,000 cups) per carton.",
     },
-    images: ["https://images.pexels.com/photos/7319334/pexels-photo-7319334.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/paper-cups.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -70,7 +70,7 @@ export const products: Product[] = [
       ar: "عبوات بلاستيكية آمنة للطعام مقاومة للتسرب مع أغطية محكمة، مناسبة لمطاعم التوصيل والكافيتريات. تُباع بالكرتونة (150 عبوة).",
       en: "Leak-resistant, food-safe plastic containers with tight-fitting lids — ideal for delivery restaurants and cafeterias. Sold by the carton (150 containers).",
     },
-    images: ["https://images.pexels.com/photos/27438824/pexels-photo-27438824.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/food-container.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -95,7 +95,7 @@ export const products: Product[] = [
       ar: "أكياس قمامة سوداء ثقيلة مقاومة للتمزق، مناسبة للمطاعم والمصانع والمنشآت الكبيرة. تُباع بالكرتونة الواحدة (10 رولات).",
       en: "Heavy black tear-resistant trash bags, suited for restaurants, factories and large facilities. Sold by the carton (10 rolls).",
     },
-    images: ["https://images.pexels.com/photos/5994772/pexels-photo-5994772.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/cutlery.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -120,7 +120,7 @@ export const products: Product[] = [
       ar: "مناديل ورقية من طبقتين، ناعمة وماصة، مناسبة للتقديم اليومي في المطاعم والكافيهات. تُباع بالكرتونة (24 عبوة).",
       en: "Soft, absorbent 2-ply paper napkins suited for daily service in restaurants and cafés. Sold by the carton (24 packs).",
     },
-    images: ["https://images.pexels.com/photos/17719822/pexels-photo-17719822.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/coffee-sleeves.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -145,7 +145,7 @@ export const products: Product[] = [
       ar: "صابون سائل لطيف على اليدين، مناسب لدورات المياه في المدارس والمستشفيات والمطاعم. يُباع بالكرتونة (12 عبوة).",
       en: "Gentle liquid hand soap suited for restrooms in schools, hospitals and restaurants. Sold by the carton (12 bottles).",
     },
-    images: ["https://images.pexels.com/photos/7622573/pexels-photo-7622573.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/trash-bags.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -170,7 +170,7 @@ export const products: Product[] = [
       ar: "طقم أدوات مائدة بلاستيكية متينة، مناسبة لمطاعم التوصيل والمناسبات. تُباع بالكرتونة (500 طقم).",
       en: "Durable disposable cutlery sets, suited for delivery restaurants and events. Sold by the carton (500 sets).",
     },
-    images: ["https://images.pexels.com/photos/5719893/pexels-photo-5719893.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/floor-cleaner.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -195,7 +195,7 @@ export const products: Product[] = [
       ar: "منظف أرضيات عالي التركيز برائحة اللافندر، مناسب للمساحات الكبيرة في المدارس والمكاتب والمولات. عبوة 5 لتر.",
       en: "A highly concentrated, lavender-scented floor cleaner suited for large spaces such as schools, offices and malls. 5-liter container.",
     },
-    images: ["https://images.pexels.com/photos/5217885/pexels-photo-5217885.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/hand-soap.svg"],
     unit: "liter",
     minOrderQty: 5,
     priceTiers: [
@@ -220,7 +220,7 @@ export const products: Product[] = [
       ar: "أكواب بلاستيكية شفافة عالية الجودة، مثالية لعصائر الكافيهات والمشروبات الباردة. تُباع بالكرتونة (1000 كوب).",
       en: "High-quality clear plastic cups, ideal for café juices and cold drinks. Sold by the carton (1,000 cups).",
     },
-    images: ["https://images.pexels.com/photos/3162037/pexels-photo-3162037.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/napkins.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -245,7 +245,7 @@ export const products: Product[] = [
       ar: "مبيض بتركيز عالي مناسب للتعقيم العام في الشركات والمصانع والمنشآت الحكومية. عبوة 5 لتر.",
       en: "A high-concentration bleach suited for general sanitation in companies, factories and government facilities. 5-liter container.",
     },
-    images: ["https://images.pexels.com/photos/7451952/pexels-photo-7451952.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/cold-cups.svg"],
     unit: "liter",
     minOrderQty: 5,
     priceTiers: [
@@ -270,7 +270,7 @@ export const products: Product[] = [
       ar: "أكمام عازلة للحرارة تحمي يد العميل عند تقديم المشروبات الساخنة. تُباع بالكرتونة (2000 كم).",
       en: "Heat-insulating sleeves that protect the customer's hand when serving hot drinks. Sold by the carton (2,000 sleeves).",
     },
-    images: ["https://images.pexels.com/photos/6312185/pexels-photo-6312185.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/hand-sanitizer.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [
@@ -295,7 +295,7 @@ export const products: Product[] = [
       ar: "معقم أيدي لطيف وفعال، مناسب للاستخدام اليومي من قبل الطلاب والمعلمين. يُباع بالكرتونة (24 عبوة).",
       en: "A gentle and effective hand sanitizer suited for daily use by students and staff. Sold by the carton (24 bottles).",
     },
-    images: ["https://images.pexels.com/photos/3999527/pexels-photo-3999527.jpeg?auto=compress&cs=tinysrgb&w=1200"],
+    images: ["/logo/products/bleach.svg"],
     unit: "carton",
     minOrderQty: 1,
     priceTiers: [

@@ -70,7 +70,6 @@ export function LogoMark({
 
 export function Logo({
   className,
-  wordmarkClassName,
   companyNameAr,
   brandName,
   tone = "badge",
@@ -81,26 +80,12 @@ export function Logo({
   companyNameAr: string;
   brandName: string;
   tone?: "badge" | "on-brand" | "mono";
-  /** "full" shows the ATLANTIS / SUPPLIES wordmark stack; "mark-only" shows just the icon. */
   variant?: "full" | "mark-only";
 }) {
   if (variant === "mark-only") return <LogoMark className={className} tone={tone} />;
-
-  const textColor = tone === "on-brand" ? "text-white" : tone === "mono" ? "text-current" : "text-text";
-  const subColor =
-    tone === "on-brand" ? "text-[#5ED993]" : tone === "mono" ? "text-current opacity-70" : "text-accent-strong";
-
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)} title={companyNameAr}>
-      <LogoMark tone={tone} />
-      <span className="flex flex-col leading-none">
-        <span
-          className={cn("font-display text-lg font-bold tracking-[0.06em]", textColor, wordmarkClassName)}
-        >
-          ATLANTIS
-        </span>
-        <span className={cn("mt-0.5 text-[10px] font-semibold tracking-[0.22em]", subColor)}>SUPPLIES</span>
-      </span>
+    <span className={cn("inline-flex items-center", className)} title={companyNameAr || brandName}>
+      <img src="/logo/atlantis-logo.svg" alt="Atlantis Supplies" className="h-11 w-auto max-w-[190px] object-contain" />
     </span>
   );
 }
