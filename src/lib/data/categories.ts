@@ -14,7 +14,7 @@ export const categories: Category[] = [
       ar: "مطهرات، منظفات أرضيات، ديتول، صابون سائل ومستلزمات النظافة العامة.",
       en: "Disinfectants, floor cleaners, hand soap and general cleaning essentials.",
     },
-    image: "/logo/category-cleaning.svg",
+    image: "/images/products/floor-cleaner.jpg",
     sectors: [
       { ar: "فنادق ومطاعم", en: "Hotels & Restaurants" },
       { ar: "مستشفيات", en: "Hospitals" },
@@ -28,7 +28,7 @@ export const categories: Category[] = [
       ar: "أكياس، أدوات بلاستيكية، وحاويات للاستخدام التجاري والمنزلي.",
       en: "Bags, plastic utensils and containers for commercial and household use.",
     },
-    image: "/logo/category-plastic.svg",
+    image: "/images/products/trash-bags.jpg",
     sectors: [{ ar: "مطاعم", en: "Restaurants" }],
   },
   {
@@ -39,7 +39,7 @@ export const categories: Category[] = [
       ar: "أكواب ورقية وبلاستيكية بمقاسات متعددة للمشروبات الساخنة والباردة.",
       en: "Paper and plastic cups in multiple sizes for hot and cold drinks.",
     },
-    image: "/logo/category-cups.svg",
+    image: "/images/products/paper-cups.jpg",
     sectors: [{ ar: "كافيهات", en: "Cafés" }],
   },
   {
@@ -50,7 +50,7 @@ export const categories: Category[] = [
       ar: "أطباق وعبوات تغليف طعام للاستخدام مرة واحدة، مناسبة للتوصيل والمطاعم.",
       en: "Disposable plates and food packaging suited for delivery and restaurants.",
     },
-    image: "/logo/category-containers.svg",
+    image: "/images/products/food-container-clear.jpg",
     sectors: [{ ar: "مطاعم", en: "Restaurants" }],
   },
   {
@@ -61,7 +61,7 @@ export const categories: Category[] = [
       ar: "كل ما يحتاجه المطعم من أدوات تقديم ومستلزمات تشغيل يومية.",
       en: "Everything a restaurant needs for daily service and operations.",
     },
-    image: "/logo/category-restaurant.svg",
+    image: "/images/products/cutlery.jpg",
     sectors: [{ ar: "مطاعم", en: "Restaurants" }],
   },
   {
@@ -72,7 +72,7 @@ export const categories: Category[] = [
       ar: "أدوات وتجهيزات مخصصة لتشغيل الكافيهات باحترافية.",
       en: "Tools and consumables tailored to running a professional café.",
     },
-    image: "/logo/category-cafe.svg",
+    image: "/images/products/cold-cups.jpg",
     sectors: [{ ar: "كافيهات", en: "Cafés" }],
   },
   {
@@ -83,7 +83,7 @@ export const categories: Category[] = [
       ar: "مناديل، مفارش ورقية، ورق تغليف وحلول ورقية متنوعة.",
       en: "Napkins, paper table covers, wrapping paper and related consumables.",
     },
-    image: "/logo/category-paper.svg",
+    image: "/images/products/paper-towels.jpg",
     sectors: [{ ar: "مطاعم ومكاتب", en: "Restaurants & Offices" }],
   },
   {
@@ -94,7 +94,7 @@ export const categories: Category[] = [
       ar: "مستلزمات نظافة وتموين عامة للمدارس والمنشآت التعليمية.",
       en: "Cleaning and general supply essentials for schools and educational facilities.",
     },
-    image: "/logo/category-hospital.svg",
+    image: "/images/products/gloves-sanitizer.jpg",
     sectors: [{ ar: "مدارس", en: "Schools" }],
   },
   {
@@ -105,7 +105,7 @@ export const categories: Category[] = [
       ar: "مستلزمات تعقيم ونظافة عامة تلبي احتياجات المنشآت الصحية.",
       en: "Sanitation and general-supply items suited to healthcare facilities.",
     },
-    image: "/logo/category-school.svg",
+    image: "/images/products/school-supplies.jpg",
     sectors: [{ ar: "مستشفيات", en: "Hospitals" }],
   },
   {
@@ -116,7 +116,7 @@ export const categories: Category[] = [
       ar: "توريدات عمومية بالجملة للشركات والمؤسسات والجهات الحكومية.",
       en: "Bulk general supplies for companies, institutions and government entities.",
     },
-    image: "/logo/category-institutions.svg",
+    image: "/images/products/school-supplies.jpg",
     sectors: [{ ar: "شركات", en: "Companies" }],
   },
 ];

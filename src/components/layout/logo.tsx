@@ -85,7 +85,7 @@ export function Logo({
   if (variant === "mark-only") return <LogoMark className={className} tone={tone} />;
   return (
     <span className={cn("inline-flex items-center", className)} title={companyNameAr || brandName}>
-      <img src="/logo/atlantis-logo.svg" alt="Atlantis Supplies" className="h-11 w-auto max-w-[190px] object-contain" />
+      <img src="/logo/atlantis-logo.png" alt="Atlantis Supplies" className="h-12 w-auto max-w-[250px] object-contain" />
     </span>
   );
 }
