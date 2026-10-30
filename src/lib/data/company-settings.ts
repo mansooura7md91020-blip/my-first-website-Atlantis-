@@ -20,8 +20,7 @@ export const companySettings: CompanySettings = {
   phone: "01050009920",
   whatsapp: "01050009920",
   email: "atlantiscompany2012@gmail.com",
-  // Left null on purpose — set from /admin/settings once the real Page exists.
-  facebookUrl: null,
+  facebookUrl: "https://www.facebook.com/profile.php?id=61595681892099&locale=ar_AR",
   address: {
     ar: "جمهورية مصر العربية",
     en: "Arab Republic of Egypt",
