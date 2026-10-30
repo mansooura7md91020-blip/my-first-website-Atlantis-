@@ -3,18 +3,22 @@ import { getDictionary } from "@/lib/i18n/config";
 import { Locale } from "@/lib/types";
 import { CompanySettings } from "@/lib/types";
 import { Logo } from "@/components/layout/logo";
-import { categories } from "@/lib/data/categories";
+import { getCategories } from "@/lib/data/categories";
 import { Container } from "@/components/ui/primitives";
+import { FacebookIcon } from "@/components/layout/facebook-button";
 
 export async function Footer({ locale, settings }: { locale: Locale; settings: CompanySettings }) {
   const dict = await getDictionary(locale);
+  const categories = await getCategories();
   const t = (key: string) => key.split(".").reduce<any>((acc, k) => acc?.[k], dict) ?? key;
 
   return (
     <footer className="mt-20 border-t border-border bg-[var(--blue-900)] text-white">
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo companyNameAr={settings.legalName.ar} brandName={settings.brandName} tone="on-brand" />
+          <span className="inline-flex rounded-xl bg-white px-3 py-2 shadow-sm">
+            <Logo companyNameAr={settings.legalName.ar} brandName={settings.brandName} logoUrl={settings.logoUrl} />
+          </span>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
             {locale === "ar"
               ? "توريدات عمومية ومنتجات تنظيف للمطاعم والكافيهات والمدارس والمستشفيات والشركات."
@@ -53,8 +57,9 @@ export async function Footer({ locale, settings }: { locale: Locale; settings: C
             <li dir="ltr" className="text-end sm:text-start">{settings.email}</li>
             {settings.facebookUrl && (
               <li>
-                <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
-                  Facebook
+                <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-3 py-2 font-semibold text-white transition-colors hover:bg-white/10">
+                  <FacebookIcon className="h-5 w-5" />
+                  {locale === "ar" ? "تابعنا على فيسبوك" : "Follow us on Facebook"}
                 </a>
               </li>
             )}
@@ -67,7 +72,7 @@ export async function Footer({ locale, settings }: { locale: Locale; settings: C
           <p>
             © {new Date().getFullYear()} {settings.brandName} — {t("footer.rights")}
           </p>
-          <p className="text-accent">{t("footer.demoNotice")}</p>
+          <p className="text-accent">{settings.catalogLive ? (locale === "ar" ? "الأسعار وشروط الدفع قابلة للتأكيد بالاتفاق" : "Prices and payment terms subject to confirmation") : t("footer.demoNotice")}</p>
         </Container>
       </div>
     </footer>

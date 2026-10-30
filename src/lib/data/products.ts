@@ -1,4 +1,5 @@
 import { Product } from "@/lib/types";
+import { catalogIsLive } from "@/lib/supabase/catalog-state";
 
 /**
  * DEMO DATA — for UI purposes only. Prices, stock and descriptions here are
@@ -309,18 +310,30 @@ export const products: Product[] = [
   },
 ];
 
+// Public catalogue reads use Supabase directly. When configured, empty tables show
+// an empty catalogue: never silently substitute fictional demo prices.
+import { dbRequest, supabaseConfig } from "@/lib/supabase/rest";
+import { DbProduct, mapProduct } from "@/lib/supabase/mappers";
+
 export async function getProducts(): Promise<Product[]> {
-  return products;
+  if (!(await catalogIsLive())) return products;
+  try {
+    const rows = await dbRequest("products?select=*&is_active=eq.true&order=sort_order.asc,created_at.desc");
+    return (rows as DbProduct[]).map(mapProduct);
+  } catch (error) {
+    console.error("Published Atlantis catalog unavailable", error);
+    throw new Error("Live products are temporarily unavailable.");
+  }
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  return products.find((p) => p.slug === slug);
+  return (await getProducts()).find((p) => p.slug === slug);
 }
 
 export async function getProductsByCategory(categoryId: string): Promise<Product[]> {
-  return products.filter((p) => p.categoryId === categoryId);
+  return (await getProducts()).filter((p) => p.categoryId === categoryId);
 }
 
 export async function getFeaturedProducts(limit = 4): Promise<Product[]> {
-  return products.slice(0, limit);
+  return (await getProducts()).slice(0, limit);
 }

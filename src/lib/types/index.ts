@@ -133,6 +133,8 @@ export interface CompanySettings {
   whatsapp: string;
   email: string;
   facebookUrl: string | null;
+  logoUrl?: string | null;
+  catalogLive?: boolean;
   address: LocalizedText;
   /** Shown as general guidance only — actual terms are set per order/quotation. */
   defaultPaymentTermsNote: LocalizedText;

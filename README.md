@@ -1,3 +1,13 @@
+> **October 2026 update:** See `ابدأ-هنا-Atlantis-Admin.txt` and `SUPABASE_STEP2.sql` for the current Supabase admin, shipping, quotation, orders and requests workflows. Any older demo-only descriptions below may no longer apply.
+
+# Atlantis Supplies — Supabase admin integration
+
+**Update 2026-10-30:** This code now includes Supabase REST-backed public catalogues, an admin-only authentication flow and CRUD for products/categories/settings, plus Storage image upload. See [`ATLANTIS_SETUP_AR.md`](ATLANTIS_SETUP_AR.md) for accurate Arabic installation notes. Order, customer, quotation and shopper-account dashboards are still demos; WhatsApp handoff is live but requests are not stored in the database.
+
+---
+
+## Historical frontend foundation notes (v1, before Supabase integration)
+
 # Atlantis General Supplies — Website (Frontend Foundation)
 
 أطلنتس للتوريدات العموميه — a bilingual (Arabic/English) B2B + retail

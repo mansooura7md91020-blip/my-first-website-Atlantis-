@@ -17,7 +17,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   return (
     <Container className="py-10 sm:py-14">
-      <SectionHeading title={t("products.title")} subtitle={t("common.demoDataNotice")} />
+      <SectionHeading title={t("products.title")} subtitle={undefined} />
       <div className="mt-8">
         <ProductsBrowser products={products} categories={categories} locale={locale} />
       </div>

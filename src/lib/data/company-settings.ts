@@ -1,4 +1,6 @@
 import { CompanySettings } from "@/lib/types";
+import { dbRequest, supabaseConfig } from "@/lib/supabase/rest";
+import { mapSettings, DbSettings } from "@/lib/supabase/mappers";
 
 /**
  * DEMO / SEED DATA — this record represents what will live in a single-row
@@ -13,6 +15,7 @@ export const companySettings: CompanySettings = {
     en: "Atlantis General Supplies",
   },
   brandName: "ATLANTIS",
+  catalogLive: false,
   salesRepresentative: {
     name: "أحمد موسى",
     phone: "01050009920",
@@ -55,5 +58,12 @@ export const companySettings: CompanySettings = {
 
 /** Async wrapper so pages already call this the way they'll call Supabase later. */
 export async function getCompanySettings(): Promise<CompanySettings> {
-  return companySettings;
+  if (!supabaseConfig()) return companySettings;
+  try {
+    const data = await dbRequest("company_settings?select=*&id=eq.1&limit=1");
+    return Array.isArray(data) && data[0] ? mapSettings(data[0] as DbSettings) : companySettings;
+  } catch (error) {
+    console.error("Atlantis public settings unavailable", error);
+    return companySettings;
+  }
 }

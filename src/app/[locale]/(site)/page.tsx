@@ -62,9 +62,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-white/10 pt-6">
               {(
                 [
-                  ["10+", locale === "ar" ? "تصنيف منتجات" : "Product categories"],
-                  ["4", locale === "ar" ? "مستويات تسعير" : "Pricing tiers"],
-                  ["24h", locale === "ar" ? "زمن الرد" : "Response time"],
+                  [String(categories.length), locale === "ar" ? "تصنيف منتجات" : "Product categories"],
+                  ["2", locale === "ar" ? "قطاعي وجملة" : "Retail & bulk"],
+                  ["✓", locale === "ar" ? "تواصل مباشر" : "Direct contact"],
                 ] as const
               ).map(([value, label]) => (
                 <div key={label}>

@@ -11,7 +11,7 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
 
-export function Header({ companyNameAr, brandName }: { companyNameAr: string; brandName: string }) {
+export function Header({ companyNameAr, brandName, logoUrl }: { companyNameAr: string; brandName: string; logoUrl?: string | null }) {
   const { t, locale } = useI18n();
   const pathname = usePathname();
   const { itemCount } = useCart();
@@ -29,7 +29,7 @@ export function Header({ companyNameAr, brandName }: { companyNameAr: string; br
     <header className="sticky top-0 z-30 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} aria-label={brandName}>
-          <Logo companyNameAr={companyNameAr} brandName={brandName} />
+          <Logo companyNameAr={companyNameAr} brandName={brandName} logoUrl={logoUrl} />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">

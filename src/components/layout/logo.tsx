@@ -24,6 +24,7 @@ export function Logo({
   brandName,
   tone = "badge",
   variant = "full",
+  logoUrl,
 }: {
   className?: string;
   wordmarkClassName?: string;
@@ -31,20 +32,21 @@ export function Logo({
   brandName: string;
   tone?: "badge" | "on-brand" | "mono";
   variant?: "full" | "mark-only";
+  logoUrl?: string | null;
 }) {
   if (variant === "mark-only") return <LogoMark className={className} tone={tone} />;
   return (
     <span className={cn("inline-flex items-center", className)} title={companyNameAr || brandName}>
-      <picture>
-        <source srcSet={tone === "on-brand" ? "/logo/atlantis-logo-light.webp" : "/logo/atlantis-logo.webp"} type="image/webp" />
+      {logoUrl ? <img src={logoUrl} alt="Atlantis Supplies" className="block h-10 w-auto max-w-[170px] object-contain sm:h-12 sm:max-w-[205px]" /> : <picture>
+        <source srcSet="/logo/atlantis-logo.webp" type="image/webp" />
         <img
-          src={tone === "on-brand" ? "/logo/atlantis-logo-light.png" : "/logo/atlantis-logo.png"}
+          src="/logo/atlantis-logo.png"
           alt="Atlantis Supplies"
           width={2048}
           height={682}
           className="block h-10 w-auto max-w-[170px] object-contain sm:h-12 sm:max-w-[205px]"
         />
-      </picture>
+      </picture>}
     </span>
   );
 }

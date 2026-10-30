@@ -6,18 +6,20 @@ import { Container, SectionHeading } from "@/components/ui/primitives";
 import { TextField, TextAreaField } from "@/components/ui/form-fields";
 import { Button } from "@/components/ui/button";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
-import { companySettings } from "@/lib/data/company-settings";
+import { companySettings as defaults } from "@/lib/data/company-settings";
+import { usePublicCatalog } from "@/lib/supabase/use-public-catalog";
+import { buildWhatsAppLink } from "@/lib/utils/whatsapp";
 
 export default function ContactPage() {
   const { t, locale } = useI18n();
-  const [sent, setSent] = useState(false);
+  const { data } = usePublicCatalog();
+  const companySettings = data?.settings ?? defaults;
+  const [prepared, setPrepared] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // In production this would create a lead/inquiry row in Supabase and/or
-    // send an email — no backend is wired up in this preview.
-    setSent(true);
+    setPrepared(true);
   }
 
   return (
@@ -56,8 +58,12 @@ export default function ContactPage() {
           <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
             {t("contact.formTitle")}
           </h2>
-          {sent ? (
-            <p className="rounded-lg bg-success/10 p-4 text-sm text-success">{t("checkout.successTitle")}</p>
+          {prepared ? (
+            <div className="space-y-3 rounded-lg bg-surface-muted p-4 text-sm text-text">
+              <p>{locale === "ar" ? "رسالتك جاهزة للإرسال. اضغط الزر التالي وأكمل الإرسال في واتساب؛ لم تُرسل تلقائيًا." : "Your message is ready. Open WhatsApp and press send; it has not been submitted automatically."}</p>
+              <a className="inline-block rounded-lg bg-[#1FAF5C] px-4 py-3 font-semibold text-white" target="_blank" rel="noopener noreferrer" href={buildWhatsAppLink(companySettings.whatsapp, `${locale === "ar" ? "رسالة من موقع أطلنتس" : "Atlantis website message"}\n${form.name}\n${form.email}\n${form.message}`)}>{locale === "ar" ? "فتح الرسالة على واتساب" : "Open WhatsApp message"}</a>
+              <button type="button" className="ms-3 underline" onClick={() => setPrepared(false)}>{locale === "ar" ? "تعديل الرسالة" : "Edit message"}</button>
+            </div>
           ) : (
             <>
               <TextField

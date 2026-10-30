@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { useCart } from "@/lib/context/cart-context";
 import { useI18n } from "@/lib/i18n/i18n-provider";
-import { products } from "@/lib/data/products";
+import { usePublicCatalog } from "@/lib/supabase/use-public-catalog";
 import { resolvePrice, formatEGP } from "@/lib/utils/pricing";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { Button, LinkButton } from "@/components/ui/button";
@@ -13,6 +13,8 @@ import { Button, LinkButton } from "@/components/ui/button";
 export default function CartPage() {
   const { t, locale } = useI18n();
   const { lines, updateQuantity, removeItem } = useCart();
+  const { data, error, loading } = usePublicCatalog();
+  const products = data?.products ?? [];
 
   const rows = useMemo(
     () =>
@@ -24,12 +26,14 @@ export default function CartPage() {
           return { line, product, price };
         })
         .filter((r): r is NonNullable<typeof r> => r !== null),
-    [lines]
+    [lines, products]
   );
 
   const hasQuoteRequired = rows.some((r) => r.price.requiresQuote);
   const subtotal = rows.reduce((sum, r) => sum + (r.price.lineTotal ?? 0), 0);
 
+  if (loading) return <Container className="py-16 text-text-muted">{locale === "ar" ? "جاري تحميل السلة..." : "Loading cart..."}</Container>;
+  if (error) return <Container className="py-16 text-danger">{error}</Container>;
   if (rows.length === 0) {
     return (
       <Container className="py-16 text-center">

@@ -1,0 +1,26 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useI18n } from "@/lib/i18n/i18n-provider";
+
+type Request = { id: string; customer_name: string; organization_name: string; phone: string; products_needed: string; delivery_location: string; status: string; quoted_amount: number | null; quoted_details: string | null; quoted_valid_until: string | null; payment_terms: string | null; delivery_terms: string | null };
+export function QuotationManager() {
+  const { locale } = useI18n(); const ar = locale === "ar";
+  const [requests, setRequests] = useState<Request[]>([]), [busy, setBusy] = useState(false), [error, setError] = useState(""), [notice, setNotice] = useState("");
+  const [selected, setSelected] = useState<Request | null>(null);
+  const [amount, setAmount] = useState(""), [details, setDetails] = useState(""), [date, setDate] = useState(""), [payment, setPayment] = useState(""), [delivery, setDelivery] = useState("");
+  async function reload() { const r=await fetch("/api/admin/supply-requests", { cache: "no-store" }); const body=await r.json(); if(!r.ok) throw new Error(body.error); setRequests(body.requests || []); }
+  useEffect(() => { reload().catch(e => setError(e.message)); }, []);
+  function edit(row: Request) { setSelected(row); setAmount(row.quoted_amount == null ? "" : String(row.quoted_amount)); setDetails(row.quoted_details ?? ""); setDate(row.quoted_valid_until ?? ""); setPayment(row.payment_terms ?? ""); setDelivery(row.delivery_terms ?? ""); setError(""); }
+  async function save(e: React.FormEvent) {
+    e.preventDefault(); if(!selected) return; setBusy(true);setError("");setNotice("");
+    try { const r=await fetch("/api/admin/supply-requests", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: selected.id, status: "quoted", quoted_amount: amount, quoted_details: details, quoted_valid_until: date, payment_terms: payment, delivery_terms: delivery }) }); const data=await r.json(); if(!r.ok) throw new Error(data.error); await reload(); setSelected(null); setNotice(ar ? "تم حفظ عرض السعر في قاعدة البيانات. لم يُرسل للعميل تلقائيًا." : "Quotation saved. It has not been sent automatically."); }
+    catch(e){setError(e instanceof Error ? e.message : "Failed");} finally { setBusy(false); }
+  }
+  const input="mt-1 w-full rounded-lg border border-border bg-bg p-2.5 text-text";
+  return <section className="space-y-5"><h1 className="text-2xl font-bold text-text">{ar ? "عروض أسعار التوريدات" : "Supply quotations"}</h1><p className="text-sm text-text-muted">{ar ? "أنشئ عرض سعر من طلب توريد مسجل. المبالغ وشروط الدفع تُحدد بالاتفاق، ولا يتم إرسال العرض تلقائيًا." : "Prepare quotations for saved supply requests. Sending is manual."}</p>
+    {error && <p className="rounded-lg bg-red-50 p-3 text-red-700" role="alert">{error}</p>}{notice && <p className="rounded-lg bg-surface-muted p-3 text-text" role="status">{notice}</p>}
+    {selected && <form onSubmit={save} className="space-y-4 rounded-xl border border-border bg-surface p-5"><h2 className="font-bold text-text">{selected.organization_name} — {selected.customer_name}</h2><p className="whitespace-pre-wrap text-sm text-text-muted">{selected.products_needed}</p><label className="block text-sm text-text">{ar ? "المبلغ المقترح بالجنيه" : "Quoted amount EGP"}<input type="number" min="0" step="0.01" className={input} value={amount} onChange={e=>setAmount(e.target.value)} /></label><label className="block text-sm text-text">{ar ? "تفاصيل العرض / الكميات" : "Quotation details"}<textarea rows={4} className={input} value={details} onChange={e=>setDetails(e.target.value)}/></label><label className="block text-sm text-text">{ar ? "صالح حتى" : "Valid until"}<input type="date" className={input} value={date} onChange={e=>setDate(e.target.value)}/></label><label className="block text-sm text-text">{ar ? "شروط الدفع بالاتفاق" : "Agreed payment terms"}<textarea className={input} value={payment} onChange={e=>setPayment(e.target.value)} rows={2}/></label><label className="block text-sm text-text">{ar ? "شروط التسليم" : "Delivery terms"}<textarea rows={2} className={input} value={delivery} onChange={e=>setDelivery(e.target.value)}/></label><div className="flex gap-2"><button disabled={busy} type="submit" className="rounded-lg bg-brand px-5 py-2 text-white">{ar ? "حفظ عرض السعر" : "Save quotation"}</button><button type="button" className="rounded-lg border border-border px-5 py-2 text-text" onClick={()=>setSelected(null)}>{ar ? "إلغاء" : "Cancel"}</button></div></form>}
+    {!requests.length && <p className="rounded-lg border border-border bg-surface p-6 text-text-muted">{ar ? "لا توجد طلبات توريد حقيقية حتى الآن." : "No supply requests yet."}</p>}
+    <div className="grid gap-3">{requests.map(r=><div key={r.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4"><div><p className="font-semibold text-text">{r.organization_name} — {r.customer_name}</p><p className="text-sm text-text-muted">{r.quoted_amount == null ? (ar ? "لم يتم تحديد المبلغ" : "No amount yet") : `${r.quoted_amount} EGP`} · {r.status}</p></div><button type="button" onClick={()=>edit(r)} className="rounded-lg border border-border px-4 py-2 text-text">{ar ? "إعداد / تعديل عرض" : "Prepare / edit"}</button></div>)}</div>
+  </section>;
+}

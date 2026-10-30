@@ -1,3 +1,6 @@
+import { redirect } from "next/navigation";
+import { getAdminToken } from "@/lib/supabase/auth";
+import { LogoutButton } from "@/components/admin/logout-button";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { isLocale } from "@/lib/i18n/config";
@@ -13,6 +16,7 @@ async function getNavItems(locale: Locale) {
     { href: `/${locale}/admin`, label: t("admin.nav.dashboard"), icon: "grid" },
     { href: `/${locale}/admin/products`, label: t("admin.nav.products"), icon: "box" },
     { href: `/${locale}/admin/categories`, label: t("admin.nav.categories"), icon: "layers" },
+    { href: `/${locale}/admin/shipping`, label: locale === "ar" ? "الشحن" : "Shipping", icon: "cart" },
     { href: `/${locale}/admin/orders`, label: t("admin.nav.orders"), icon: "cart" },
     { href: `/${locale}/admin/supply-requests`, label: t("admin.nav.supplyRequests"), icon: "inbox" },
     { href: `/${locale}/admin/quotations`, label: t("admin.nav.quotations"), icon: "doc" },
@@ -32,6 +36,7 @@ export default async function AdminLayout({
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
 
+  if (!(await getAdminToken())) redirect(`/${locale}/staff-login`);
   const { t } = await useI18nServer(locale);
   const navItems = await getNavItems(locale);
 
@@ -63,7 +68,7 @@ export default async function AdminLayout({
           <ThemeToggle />
         </div>
         <div className="m-3 rounded-lg bg-surface-muted p-3 text-xs leading-relaxed text-text-muted">
-          {t("admin.common.demoNotice")}
+          {locale === "ar" ? "المنتجات والشحن والطلبات والتوريد تعمل عبر Supabase بعد تنفيذ ملف SQL الخاص بالتحديث. عروض الأسعار والعملاء ما زالت تجريبية." : "Catalog, shipping, orders and supply requests use Supabase after SQL setup. Quotes and customers remain demos."}
         </div>
       </aside>
 
@@ -93,6 +98,7 @@ export default async function AdminLayout({
         </nav>
 
         <div className="hidden items-center justify-end border-b border-border bg-surface px-6 py-2.5 lg:flex">
+          <LogoutButton locale={locale} />
           <Link href={`/${locale}`} className="text-xs font-medium text-brand hover:underline">
             ← {t("admin.nav.viewSite")}
           </Link>

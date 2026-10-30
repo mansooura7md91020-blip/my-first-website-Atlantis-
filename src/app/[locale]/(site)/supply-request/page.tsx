@@ -6,13 +6,18 @@ import { Container, SectionHeading } from "@/components/ui/primitives";
 import { TextField, TextAreaField, SelectField } from "@/components/ui/form-fields";
 import { Button, LinkButton } from "@/components/ui/button";
 import { buildWhatsAppLink, renderTemplate } from "@/lib/utils/whatsapp";
-import { companySettings } from "@/lib/data/company-settings";
+import { companySettings as defaultSettings } from "@/lib/data/company-settings";
+import { usePublicCatalog } from "@/lib/supabase/use-public-catalog";
 
 const orgTypeKeys = ["restaurant", "cafe", "school", "hospital", "university", "company", "other"] as const;
 
 export default function SupplyRequestPage() {
   const { t, locale } = useI18n();
-  const [submitted, setSubmitted] = useState<string | null>(null);
+  const { data } = usePublicCatalog();
+  const companySettings = data?.settings ?? defaultSettings;
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [requestId, setRequestId] = useState("");
   const [form, setForm] = useState({
     customerName: "",
     organizationName: "",
@@ -23,41 +28,23 @@ export default function SupplyRequestPage() {
     deliveryLocation: "",
     deliveryDate: "",
     notes: "",
+    website: "",
   });
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    // In production this creates a row in Supabase `supply_requests`
-    // (status "new") for an admin to review and turn into a quotation.
-    // Payment terms are never set here — they're agreed per quotation.
-    const requestId = `SR-${Math.floor(100 + Math.random() * 900)}`;
-    setSubmitted(requestId);
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault(); setError(""); setBusy(true);
+    try {
+      const response = await fetch("/api/supply-requests", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
+      const result = await response.json(); if (!response.ok) throw new Error(result.error || "Could not submit request");
+      setRequestId(result.requestId);
+    } catch(err) { setError(err instanceof Error ? err.message : "Failed"); }
+    finally { setBusy(false); }
   }
 
-  if (submitted) {
-    const message = renderTemplate(companySettings.whatsappTemplates.supplyRequestReceived[locale], {});
-    return (
-      <Container className="py-20 text-center">
-        <h1 className="font-display text-2xl font-bold text-text">{t("supplyRequest.successTitle")}</h1>
-        <p className="mx-auto mt-3 max-w-md text-text-muted">
-          {t("supplyRequest.successBody", { requestId: submitted })}
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a
-            href={buildWhatsAppLink(companySettings.whatsapp, message)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-lg bg-[#1FAF5C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 hover:bg-[#1c9e53]"
-          >
-            {t("common.whatsappUs")}
-          </a>
-          <LinkButton href={`/${locale}`} variant="outline">
-            {t("common.backToHome")}
-          </LinkButton>
-        </div>
-      </Container>
-    );
-  }
+  if (requestId) return <Container className="max-w-3xl py-20 text-center"><h1 className="text-2xl font-bold text-text">{locale === "ar" ? "تم استلام طلب التوريد" : "Supply request received"}</h1>
+    <p className="mt-2 text-text-muted">{locale === "ar" ? "رقم الطلب" : "Reference"}: {requestId.slice(0,8)}</p>
+    <a className="mt-6 inline-block rounded-lg bg-brand px-5 py-3 text-white" href={buildWhatsAppLink(companySettings.whatsapp, `${locale === "ar" ? "متابعة طلب التوريد" : "Follow up supply request"} #${requestId.slice(0,8)}\n${form.organizationName}\n${form.phone}`)} target="_blank" rel="noopener noreferrer">{locale === "ar" ? "متابعة على واتساب (اختياري)" : "Follow up on WhatsApp (optional)"}</a>
+  </Container>;
 
   return (
     <Container className="max-w-3xl py-10 sm:py-14">
@@ -141,8 +128,10 @@ export default function SupplyRequestPage() {
           onChange={(e) => setForm({ ...form, notes: e.target.value })}
         />
 
-        <Button type="submit" className="w-full sm:w-auto">
-          {t("supplyRequest.submit")}
+        <input className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form.website} onChange={e => setForm({ ...form, website: e.target.value })} />
+        {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700" role="alert">{error}</p>}
+        <Button type="submit" disabled={busy} className="w-full sm:w-auto">
+          {busy ? (locale === "ar" ? "جاري التسجيل..." : "Saving...") : (locale === "ar" ? "إرسال طلب التوريد للمراجعة" : "Submit supply request")}
         </Button>
       </form>
     </Container>

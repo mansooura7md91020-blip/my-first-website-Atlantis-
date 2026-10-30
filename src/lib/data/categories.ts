@@ -1,4 +1,5 @@
 import { Category } from "@/lib/types";
+import { catalogIsLive } from "@/lib/supabase/catalog-state";
 
 /**
  * DEMO DATA — replace via /admin/categories. Shape mirrors the planned
@@ -121,10 +122,15 @@ export const categories: Category[] = [
   },
 ];
 
+import { dbRequest, supabaseConfig } from "@/lib/supabase/rest";
+import { DbCategory, mapCategory } from "@/lib/supabase/mappers";
+
 export async function getCategories(): Promise<Category[]> {
-  return categories;
+  if (!(await catalogIsLive())) return categories;
+  const rows = await dbRequest("categories?select=*&is_active=eq.true&order=sort_order.asc,created_at.asc");
+  return (rows as DbCategory[]).map(mapCategory);
 }
 
 export async function getCategoryBySlug(slug: string): Promise<Category | undefined> {
-  return categories.find((c) => c.slug === slug);
+  return (await getCategories()).find((c) => c.slug === slug);
 }
