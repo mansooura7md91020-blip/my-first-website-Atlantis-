@@ -41,7 +41,7 @@ export function CompanySettingsForm() {
     } catch(e) { setError(e instanceof Error ? e.message : "Upload failed"); }
     finally { setUploading(false); }
   }
-  const fields: { key: keyof SettingsForm; label: string }[] = [
+  const fields: { key: Exclude<keyof SettingsForm, "catalog_live">; label: string }[] = [
     { key: "company_name_ar", label: "اسم الشركة بالعربي" }, { key: "company_name_en", label: "Company name (English)" },
     { key: "phone", label: "Phone" }, { key: "whatsapp", label: "WhatsApp" },
     { key: "email", label: "Email" }, { key: "logo_url", label: "Logo URL" }, { key: "facebook_url", label: "Facebook Page URL" }, { key: "address_ar", label: "العنوان بالعربي" }, { key: "address_en", label: "Address (English)" },
