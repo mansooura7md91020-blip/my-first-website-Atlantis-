@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n/i18n-provider";
 import type { DbCategory, DbProduct } from "@/lib/supabase/mappers";
 
@@ -39,6 +40,7 @@ export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [imagePreviewError, setImagePreviewError] = useState(false);
   const [editing, setEditing] = useState(false);
   const [category, setCategory] = useState<CategoryForm>(emptyCategory);
   const [product, setProduct] = useState<ProductForm>(emptyProduct);
@@ -52,14 +54,14 @@ export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
   function startNew() {
     setCategory({ ...emptyCategory });
     setProduct({ ...emptyProduct, category_id: catalog?.categories[0]?.id || "", price_tiers: [{ minQty: 1, maxQty: null, pricePerUnit: null }] });
-    setEditing(true); setError(""); setNotice("");
+    setEditing(true); setError(""); setNotice(""); setImagePreviewError(false);
   }
   function startCategory(c: DbCategory) {
-    setCategory({ ...c }); setEditing(true); setError("");
+    setCategory({ ...c }); setEditing(true); setError(""); setNotice(""); setImagePreviewError(false);
   }
   function startProduct(p: DbProduct) {
     setProduct({ ...p, image_urls: Array.isArray(p.image_urls) ? p.image_urls as string[] : [], price_tiers: Array.isArray(p.price_tiers) ? p.price_tiers.map((t: any) => ({ minQty: Number(t.minQty ?? t.min_qty ?? 1), maxQty: t.maxQty ?? t.max_qty ?? null, pricePerUnit: t.pricePerUnit ?? t.price_per_unit ?? null })) : [{ minQty: 1, maxQty: null, pricePerUnit: null }], stock_qty: p.stock_qty ?? 0 });
-    setEditing(true); setError("");
+    setEditing(true); setError(""); setNotice(""); setImagePreviewError(false);
   }
   async function save(e: React.FormEvent) {
     e.preventDefault(); setSaving(true); setError(""); setNotice("");
@@ -79,14 +81,16 @@ export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
   }
   async function upload(file: File | undefined) {
     if (!file) return;
-    setSaving(true); setError("");
+    setSaving(true); setError(""); setNotice(""); setImagePreviewError(false);
     try {
       const form = new FormData(); form.append("file", file);
       const response = await fetch("/api/admin/upload", { method: "POST", body: form });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Upload failed");
+      if (typeof result.url !== "string" || !result.url.startsWith("https://")) throw new Error("Upload did not return a valid image URL.");
       if (mode === "categories") setC("image_url", result.url);
       else setP("image_urls", [result.url]);
+      setNotice(ar ? "تم رفع الصورة بنجاح. اضغط حفظ في Supabase لحفظها مع المنتج أو القسم." : "Image uploaded. Click Save to Supabase to attach it to this record.");
     } catch (err) { setError(err instanceof Error ? err.message : "Upload failed"); }
     finally { setSaving(false); }
   }
@@ -119,8 +123,22 @@ export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
           <Input type="number" label={ar ? "أقل كمية للطلب" : "Minimum order qty"} value={product.min_order_qty} onChange={v => setP("min_order_qty", Number(v))} />
           <Input type="number" label={ar ? "كمية المخزون" : "Stock quantity"} value={product.stock_qty ?? 0} onChange={v => setP("stock_qty", Number(v))} />
         </div>
-        <Input label={ar ? "رابط صورة المنتج" : "Product image URL"} value={product.image_urls[0] || ""} onChange={v => setP("image_urls", v ? [v] : [])} />
+        <Input label={ar ? "رابط صورة المنتج" : "Product image URL"} value={product.image_urls[0] || ""} onChange={v => { setP("image_urls", v ? [v] : []); setImagePreviewError(false); }} />
         <label className="block text-sm text-text">{ar ? "أو ارفع صورة المنتج" : "Or upload a product photo"}<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={e => upload(e.target.files?.[0])} className="mt-2 block w-full text-sm" /></label>
+        {product.image_urls[0] ? (
+          <div className="space-y-2 rounded-lg border border-border bg-bg p-3">
+            <p className="text-sm font-medium text-text">{ar ? "معاينة صورة المنتج" : "Product image preview"}</p>
+            {!imagePreviewError ? (
+              <Image src={product.image_urls[0]} width={320} height={220} unoptimized alt={product.name_ar || product.name_en || "Product photo"} onError={() => setImagePreviewError(true)} className="h-48 w-64 max-w-full rounded-lg border border-border object-contain" />
+            ) : (
+              <p className="text-sm text-red-700">{ar ? "تعذر عرض الصورة. افتح رابطها بالأسفل وتأكد أنها متاحة." : "Image could not load. Open its URL below to check access."}</p>
+            )}
+            <a href={product.image_urls[0]} target="_blank" rel="noreferrer" className="block break-all text-xs text-brand underline">{ar ? "فتح رابط الصورة للتأكد" : "Open image link to verify"}</a>
+            <p className="text-xs text-text-muted">{ar ? "لو رفعت صورة جديدة، اضغط حفظ في Supabase بعد ظهور المعاينة." : "After uploading a new image, click Save to Supabase to keep it."}</p>
+          </div>
+        ) : (
+          <p className="text-xs text-text-muted">{ar ? "لم يتم ربط صورة بهذا المنتج بعد." : "No image attached to this product yet."}</p>
+        )}
         <div className="space-y-3 rounded-lg bg-surface-muted p-4"><div className="flex items-center justify-between"><h3 className="font-semibold text-text">{ar ? "شرائح الأسعار حسب الكمية (جنيه مصري)" : "Quantity price tiers (EGP)"}</h3><ActionButton onClick={() => setP("price_tiers", [...product.price_tiers.slice(0, -1), { ...product.price_tiers[product.price_tiers.length - 1], maxQty: Math.max(1, product.price_tiers[product.price_tiers.length - 1].minQty) + 9 }, { minQty: Math.max(1, product.price_tiers[product.price_tiers.length - 1].minQty) + 10, maxQty: null, pricePerUnit: null }])}>{ar ? "+ شريحة" : "+ Tier"}</ActionButton></div>
           <p className="text-xs text-text-muted">{ar ? "اكتب سعر الوحدة، أو اتركه فارغًا لطلب عرض سعر. يجب أن تبدأ الشرائح من 1 وتكون متتالية." : "Leave price blank for request-a-quote. Tiers must start at 1 and be consecutive."}</p>
           {product.price_tiers.map((tier, index) => <div key={index} className="grid grid-cols-3 gap-2">
@@ -136,7 +154,7 @@ export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
     </form>}
     <div className="overflow-x-auto rounded-xl border border-border bg-surface">
       <table className="w-full text-sm"><thead className="bg-surface-muted text-start text-text-muted"><tr><th className="p-3 text-start">{ar ? "الاسم" : "Name"}</th><th className="p-3 text-start">Slug</th><th className="p-3 text-start">{ar ? "الحالة" : "Status"}</th><th className="p-3 text-start">{ar ? "إجراءات" : "Actions"}</th></tr></thead>
-        <tbody>{(mode === "categories" ? catalog?.categories : catalog?.products)?.map(row => <tr key={row.id} className="border-t border-border"><td className="p-3 font-semibold text-text">{ar ? row.name_ar : row.name_en}</td><td className="p-3 text-text-muted">{row.slug}</td><td className="p-3 text-text-muted">{row.is_active ? (ar ? "ظاهر" : "Visible") : (ar ? "مخفي" : "Hidden")}</td><td className="flex flex-wrap gap-2 p-3"><ActionButton onClick={() => mode === "categories" ? startCategory(row as DbCategory) : startProduct(row as DbProduct)}>{ar ? "تعديل" : "Edit"}</ActionButton><ActionButton danger onClick={() => remove(row.id)}>{ar ? "حذف" : "Delete"}</ActionButton></td></tr>)}</tbody>
+        <tbody>{(mode === "categories" ? catalog?.categories : catalog?.products)?.map(row => <tr key={row.id} className="border-t border-border"><td className="p-3 font-semibold text-text"><div className="flex items-center gap-3">{mode === "products" && Array.isArray((row as DbProduct).image_urls) && typeof (row as DbProduct).image_urls[0] === "string" && <Image src={(row as DbProduct).image_urls[0] as string} alt="" width={48} height={48} unoptimized className="h-12 w-12 rounded-md border border-border object-cover" />}{ar ? row.name_ar : row.name_en}</div></td><td className="p-3 text-text-muted">{row.slug}</td><td className="p-3 text-text-muted">{row.is_active ? (ar ? "ظاهر" : "Visible") : (ar ? "مخفي" : "Hidden")}</td><td className="flex flex-wrap gap-2 p-3"><ActionButton onClick={() => mode === "categories" ? startCategory(row as DbCategory) : startProduct(row as DbProduct)}>{ar ? "تعديل" : "Edit"}</ActionButton><ActionButton danger onClick={() => remove(row.id)}>{ar ? "حذف" : "Delete"}</ActionButton></td></tr>)}</tbody>
       </table>
       {(mode === "categories" ? catalog?.categories.length : catalog?.products.length) === 0 && <p className="p-5 text-center text-text-muted">{ar ? "لا توجد بيانات بعد. ابدأ بإضافة قسم ثم منتجات." : "No records yet. Add a category, then products."}</p>}
     </div>
