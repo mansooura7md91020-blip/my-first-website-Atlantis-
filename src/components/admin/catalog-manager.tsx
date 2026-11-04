@@ -32,6 +32,12 @@ function ActionButton({ children, onClick, danger = false }: { children: React.R
   return <button type="button" onClick={onClick} className={`rounded-lg border px-3 py-1.5 text-sm ${danger ? "border-red-300 text-red-700" : "border-border text-text"}`}>{children}</button>;
 }
 
+function productImageUrl(row: DbCategory | DbProduct): string | null {
+  if (!("image_urls" in row) || !Array.isArray(row.image_urls)) return null;
+  const first = row.image_urls[0];
+  return typeof first === "string" && first.trim() ? first : null;
+}
+
 export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
   const { locale } = useI18n();
   const ar = locale === "ar";
@@ -154,7 +160,15 @@ export function CatalogManager({ mode }: { mode: "products" | "categories" }) {
     </form>}
     <div className="overflow-x-auto rounded-xl border border-border bg-surface">
       <table className="w-full text-sm"><thead className="bg-surface-muted text-start text-text-muted"><tr><th className="p-3 text-start">{ar ? "الاسم" : "Name"}</th><th className="p-3 text-start">Slug</th><th className="p-3 text-start">{ar ? "الحالة" : "Status"}</th><th className="p-3 text-start">{ar ? "إجراءات" : "Actions"}</th></tr></thead>
-        <tbody>{(mode === "categories" ? catalog?.categories : catalog?.products)?.map(row => <tr key={row.id} className="border-t border-border"><td className="p-3 font-semibold text-text"><div className="flex items-center gap-3">{mode === "products" && Array.isArray((row as DbProduct).image_urls) && typeof (row as DbProduct).image_urls[0] === "string" && <Image src={(row as DbProduct).image_urls[0] as string} alt="" width={48} height={48} unoptimized className="h-12 w-12 rounded-md border border-border object-cover" />}{ar ? row.name_ar : row.name_en}</div></td><td className="p-3 text-text-muted">{row.slug}</td><td className="p-3 text-text-muted">{row.is_active ? (ar ? "ظاهر" : "Visible") : (ar ? "مخفي" : "Hidden")}</td><td className="flex flex-wrap gap-2 p-3"><ActionButton onClick={() => mode === "categories" ? startCategory(row as DbCategory) : startProduct(row as DbProduct)}>{ar ? "تعديل" : "Edit"}</ActionButton><ActionButton danger onClick={() => remove(row.id)}>{ar ? "حذف" : "Delete"}</ActionButton></td></tr>)}</tbody>
+        <tbody>{(mode === "categories" ? catalog?.categories : catalog?.products)?.map(row => {
+          const imageUrl = mode === "products" ? productImageUrl(row) : null;
+          return <tr key={row.id} className="border-t border-border">
+            <td className="p-3 font-semibold text-text"><div className="flex items-center gap-3">{imageUrl && <Image src={imageUrl} alt="" width={48} height={48} unoptimized className="h-12 w-12 rounded-md border border-border object-cover" />}{ar ? row.name_ar : row.name_en}</div></td>
+            <td className="p-3 text-text-muted">{row.slug}</td>
+            <td className="p-3 text-text-muted">{row.is_active ? (ar ? "ظاهر" : "Visible") : (ar ? "مخفي" : "Hidden")}</td>
+            <td className="flex flex-wrap gap-2 p-3"><ActionButton onClick={() => mode === "categories" ? startCategory(row as DbCategory) : startProduct(row as DbProduct)}>{ar ? "تعديل" : "Edit"}</ActionButton><ActionButton danger onClick={() => remove(row.id)}>{ar ? "حذف" : "Delete"}</ActionButton></td>
+          </tr>;
+        })}</tbody>
       </table>
       {(mode === "categories" ? catalog?.categories.length : catalog?.products.length) === 0 && <p className="p-5 text-center text-text-muted">{ar ? "لا توجد بيانات بعد. ابدأ بإضافة قسم ثم منتجات." : "No records yet. Add a category, then products."}</p>}
     </div>
